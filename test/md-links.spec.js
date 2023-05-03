@@ -8,3 +8,11 @@ describe('mdLinks', () => {
   });
 
 });
+
+describe('mdLinks', () => {
+
+  it('deberìa devolver una promesa', () => {
+    expect (typeof mdLinks).toBe('promise');
+  });
+
+});
