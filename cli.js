@@ -1,5 +1,7 @@
 const { mdLinks } = require ('./index.js');
-mdLinks('./prueba')
+//const { mdLinks } = require ('./index.js');
+
+mdLinks('./prueba/prueba1.md')
 .then((resultado)=>{
     console.log(resultado);
 })
