@@ -9,7 +9,9 @@ const identificator = (routes) => {
         if (err) {
             reject(err)
         } else {
-            if (!stats.isFile()) {
+            if (!stats.isFile(routes)) {
+                routes = false;
+                console.log(routes);
                 console.log('es un direcotiro');
                 do {
                     filenames = fs.readdirSync(__dirname);
@@ -18,9 +20,9 @@ const identificator = (routes) => {
 
                     });
 
-                } while (routes = true) {
+                } while (routes = false) {
 
-                    console.log('es una fila', prueba);
+                    
                     //se utiliza esto fs.readdirSync() method 
                     //leerlo como directorio y me va entregra un array con las rutas de los archivos
 
