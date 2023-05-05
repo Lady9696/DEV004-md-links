@@ -1,7 +1,7 @@
 // fs se debe usar para poder realizar las fucniones debemos 'importar' el mòdulo fs
 //const  access  = require('fs');
 //esto es para poder usar  los modulos de path
-const { identificator } = require ('./test/data');
+const { identificator } = require('./test/data');
 const { fs, path } = require('./test/data.js');
 1// se crea una funciòn que tiene routes y options como paàmetro, lo que me retorna una promesa
 //con dos valores   que son resolve y reject.
@@ -14,7 +14,8 @@ const mdLinks = (routes, options) => {
         routes = path.resolve(routes);
         //resolve('ruta absoluta');
         console.log(routes, 'routesss');
-      } identificator(routes)
+      } 
+      identificator(routes)
       let archivoMd;
       /*fs.stat(routes, (err, stats) => {
         if (err) {
