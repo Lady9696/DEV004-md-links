@@ -1,6 +1,17 @@
 const fs = require("fs");
 const path = require("path");
+const access  = require ('node:fs');
+const constants = require ('node:fs');
 
+// Funciòn para saber si existe la ruta
+const existPath = () =>{
+  access(file, constants.F_OK, (err) => {
+    console.log(`${file} ${err ? 'no existe' : 'Si existe'}`);
+  });
+  return existPath
+}
+
+/*
 //hacer una funciòn para leer direcotrios
 const identificator = (routes) => {
   //para identificar si es un directorio
@@ -25,8 +36,13 @@ const identificator = (routes) => {
     }
   });
 };
+*/
 module.exports = {
-  identificator,
+  identificator, existPath,
 };
 module.exports.fs = require("fs");
 module.exports.path = require("path");
+module.exports.access = require("node:fs");
+module.exports.constants = require("node:fs");
+
+

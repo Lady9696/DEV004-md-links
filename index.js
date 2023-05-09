@@ -9,7 +9,7 @@ const mdLinks = (routes, options) => {
   return new Promise((resolve, reject) => {
 
     //encadena
-    siExiste(routes)
+    existPath(routes)
     .then(
       (existe) => {
         if(existe){
@@ -29,22 +29,7 @@ const mdLinks = (routes, options) => {
     )
 
     //anidad
-    siExiste(routes)
-    .then(
-      (existe) => {
-        if(existe){
-          esAsboluta()
-          .then( //encadenanada
-            () => {
-
-            }
-          )
-        }
-        else{
-          reject()
-        }
-      }
-    )
+    
     
 
     //1) para verificar si la ruta existe (forma sincrònica)
@@ -57,7 +42,7 @@ const mdLinks = (routes, options) => {
       } 
       identificator(routes)
       let archivoMd;
-      /*fs.stat(routes, (err, stats) => {
+      fs.stat(routes, (err, stats) => {
         if (err) {
           reject(err);
         } else {
@@ -88,7 +73,7 @@ const mdLinks = (routes, options) => {
         //le ctura de los archivos md
 
 
-      });*/
+      });
       //3) identficar si es un archivo, si lo es leer de maneraa asincronica, p
       // pero si es un directorio, leer directorio de manera sincrònica
 
