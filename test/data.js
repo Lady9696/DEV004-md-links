@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const access  = require ('node:fs');
 const constants = require ('node:fs');
+const file = 'package.json';
 
 // Funciòn para saber si existe la ruta
 const existPath = () =>{
@@ -38,7 +39,8 @@ const identificator = (routes) => {
 };
 */
 module.exports = {
-  identificator, existPath,
+  //identificator, 
+  existPath,
 };
 module.exports.fs = require("fs");
 module.exports.path = require("path");
