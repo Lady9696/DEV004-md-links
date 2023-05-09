@@ -7,6 +7,46 @@ const { fs, path } = require('./test/data.js');
 //con dos valores   que son resolve y reject.
 const mdLinks = (routes, options) => {
   return new Promise((resolve, reject) => {
+
+    //encadena
+    siExiste(routes)
+    .then(
+      (existe) => {
+        if(existe){
+           return esAsboluta()
+        }
+        else{
+          reject()
+        }
+      }
+    )
+    .then(
+      (absouta) => {
+          if(!abolsuta){
+              convertirAbsoluita()
+          }
+      }
+    )
+
+    //anidad
+    siExiste(routes)
+    .then(
+      (existe) => {
+        if(existe){
+          esAsboluta()
+          .then( //encadenanada
+            () => {
+
+            }
+          )
+        }
+        else{
+          reject()
+        }
+      }
+    )
+    
+
     //1) para verificar si la ruta existe (forma sincrònica)
     if (fs.existsSync(routes)) {
       //2) si la ruta no es absoluta, se vuelve absoluta con path.resolve
