@@ -2,8 +2,6 @@
 //const { identificator } = require('./test/data');
 const { existPath, absolute } = require('./test/data');
 
-
-
 const { fs, path, access, constants } = require('./test/data.js');
 1// se crea una funciòn que tiene routes y options como paàmetro, lo que me retorna una promesa
 //con dos valores   que son resolve y reject.
