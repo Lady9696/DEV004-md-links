@@ -1,6 +1,6 @@
 // fs se debe usar para poder realizar las fucniones debemos 'importar' el mòdulo fs
 //const { identificator } = require('./test/data');
-const { existPath } = require('./test/data');
+const { existPath, absolute } = require('./test/data');
 
 
 
@@ -11,17 +11,20 @@ const mdLinks = (routes, options) => {
   return new Promise((resolve, reject) => {
 
     //encadena
-    existPath(routes)
-    .then(
-      (existe) => {
-        if(existe){
-          console.log(existe); //esAsboluta()
+    
+    
+     if(existPath(routes)){
+          console.log(existe); 
+          const routeAbsolute = absolute(routes);
+          
+           //esAsboluta()
         }
         else{
           reject('no existe')
         }
-      }
-    )
+      });
+
+  //readfile con promesas
     /*.then(
       (absouta) => {
           if(!abolsuta){
@@ -32,12 +35,7 @@ const mdLinks = (routes, options) => {
 */
     //anidad
     
-    
-
-   
-
-
-  });
+ 
 }
 
 

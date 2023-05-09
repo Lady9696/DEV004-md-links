@@ -4,12 +4,17 @@ const { access, constants } = require('fs');
 const file = 'package.json';
 
 const existPath = (file) => {
-  (fs.existsSync(file))
-  return existPath
+   return fs.existsSync(file);
+
 };
 
+const absolute = (file) =>{
+  if (!path.isAbsolute(file)) {
+    file = path.resolve(file)}
+    return file
+}
 
-
+//
 /*
 //hacer una funciòn para leer direcotrios
 const identificator = (routes) => {
@@ -38,7 +43,7 @@ const identificator = (routes) => {
 */
 module.exports = {
   //identificator, 
-  existPath,
+  existPath, absolute
 };
 module.exports.fs = require("fs");
 module.exports.path = require("path");
