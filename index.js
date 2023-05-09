@@ -15,21 +15,21 @@ const mdLinks = (routes, options) => {
     .then(
       (existe) => {
         if(existe){
-           return esAsboluta()
+          console.log(existe); //esAsboluta()
         }
         else{
           reject('no existe')
         }
       }
     )
-    .then(
+    /*.then(
       (absouta) => {
           if(!abolsuta){
               convertirAbsoluita()
           }
       }
     )
-
+*/
     //anidad
     
     

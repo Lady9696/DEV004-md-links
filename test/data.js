@@ -1,16 +1,14 @@
 const fs = require("fs");
 const path = require("path");
-const access  = require ('node:fs');
-const constants = require ('node:fs');
+const { access, constants } = require('fs');
 const file = 'package.json';
 
-// Funciòn para saber si existe la ruta
-const existPath = () =>{
-  access(file, constants.F_OK, (err) => {
-    console.log(`${file} ${err ? 'no existe' : 'Si existe'}`);
-  });
+const existPath = (file) => {
+  (fs.existsSync(file))
   return existPath
-}
+};
+
+
 
 /*
 //hacer una funciòn para leer direcotrios
