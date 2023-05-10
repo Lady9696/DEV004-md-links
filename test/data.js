@@ -15,6 +15,8 @@ const absolute = (file) =>{
 }
 
 const isFile = (file) => {
+  
+  
 
 }
 const mdExtension = (file) => {
