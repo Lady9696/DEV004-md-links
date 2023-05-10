@@ -24,13 +24,16 @@ const isFile = (file) => {
           
     } 
     
-
-
   });
-  
-  
-
 }
+
+// funciòn para leer los archivos, debe ser una promesa
+const readFile = (file) => {
+  
+}
+
+
+
 const mdExtension = (file) => {
   
 }
