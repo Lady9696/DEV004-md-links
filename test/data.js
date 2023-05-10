@@ -3,40 +3,49 @@ const path = require("path");
 
 // Fucniòn para identificar si existe la ruta
 const existPath = (file) => {
-   return fs.existsSync(file);
+  return fs.existsSync(file);
 
 };
 // Funciòn que identifica si la ruta es relativa o absoluta, y en caso de ser relativa, la vuelve absoluta.
-const absolute = (file) =>{
+const absolute = (file) => {
   if (!path.isAbsolute(file)) {
-    file = path.resolve(file)}
-    return file
+    file = path.resolve(file)
+  }
+  return file
 }
+/*
 // Funciòn que identiifca si es un archivo 
 const isFile = (file) => {
   fs.stat(file, (err, stats) => {
     if (err) {
-      reject(err);
-    } else {
+      console.log(err);
       
-    } if (stats.isFile()) {
-      return file;
-          
+    } else {
+      if(!stats.isFile(file)){
+        return isFile(file);
+        
+      }
+     
+      //return 
+      //console.log(stats.isFile(file))
     } 
     
   });
 }
+*/
+// Funciòn para identifar archivos md
+const identificatorMd = (file) => {
+  if (path.extname === '.md') {
+    console.log(file);
+
+  }
+}
 
 // funciòn para leer los archivos, debe ser una promesa
-const readFile = (file) => {
-  
-}
 
 
 
-const mdExtension = (file) => {
-  
-}
+
 
 //
 /*
@@ -67,7 +76,7 @@ const identificator = (routes) => {
 */
 module.exports = {
   //identificator, 
-  existPath, absolute, isFile,
+  existPath, absolute,
 };
 module.exports.fs = require("fs");
 module.exports.path = require("path");
