@@ -9,9 +9,7 @@ const mdLinks = (routes, options) => {
   return new Promise((resolve, reject) => {
 
     //encadena
-    
-    
-     if(existPath(routes)){
+         if(existPath(routes)){
           console.log(existe); 
           const routeAbsolute = absolute(routes);
           
