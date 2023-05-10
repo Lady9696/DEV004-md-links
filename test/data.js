@@ -1,20 +1,32 @@
 const fs = require("fs");
 const path = require("path");
-const { access, constants } = require('fs');
-const file = 'package.json';
 
+// Fucniòn para identificar si existe la ruta
 const existPath = (file) => {
    return fs.existsSync(file);
 
 };
-
+// Funciòn que identifica si la ruta es relativa o absoluta, y en caso de ser relativa, la vuelve absoluta.
 const absolute = (file) =>{
   if (!path.isAbsolute(file)) {
     file = path.resolve(file)}
     return file
 }
-
+// Funciòn que identiifca si es un archivo 
 const isFile = (file) => {
+  fs.stat(file, (err, stats) => {
+    if (err) {
+      reject(err);
+    } else {
+      
+    } if (stats.isFile()) {
+      return file;
+          
+    } 
+    
+
+
+  });
   
   
 
@@ -52,11 +64,10 @@ const identificator = (routes) => {
 */
 module.exports = {
   //identificator, 
-  existPath, absolute
+  existPath, absolute, isFile,
 };
 module.exports.fs = require("fs");
 module.exports.path = require("path");
-module.exports.access = require("node:fs");
-module.exports.constants = require("node:fs");
+
 
 

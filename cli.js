@@ -1,7 +1,7 @@
 const { mdLinks } = require ('./index.js');
 //const { mdLinks } = require ('./index.js');
 
-mdLinks('./gato/existe')
+mdLinks('./test')
 .then((resultado)=>{
     console.log(resultado);
 })
