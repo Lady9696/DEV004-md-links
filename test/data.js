@@ -14,6 +14,13 @@ const absolute = (file) =>{
     return file
 }
 
+const isFile = (file) => {
+
+}
+const mdExtension = (file) => {
+  
+}
+
 //
 /*
 //hacer una funciòn para leer direcotrios

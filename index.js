@@ -8,16 +8,18 @@ const { fs, path, access, constants } = require('./test/data.js');
 const mdLinks = (routes, options) => {
   return new Promise((resolve, reject) => {
 
-    //encadena
+    // se verifica si la ruta existe
          if(existPath(routes)){
           console.log(existe); 
+          // si la ruta es relativa, se vuelve absoluta
           const routeAbsolute = absolute(routes);
-          
-           //esAsboluta()
+          //esAsboluta()
         }
         else{
           reject('no existe')
         }
+
+        
       });
 
   //readfile con promesas
