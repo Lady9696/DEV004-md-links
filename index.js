@@ -2,7 +2,7 @@
 //const { identificator } = require('./test/data');
 const { existPath, absolute } = require('./test/data');
 
-const { fs, path, access, constants } = require('./test/data.js');
+const { fs, path } = require('./test/data.js');
 1// se crea una funciòn que tiene routes y options como paàmetro, lo que me retorna una promesa
 //con dos valores   que son resolve y reject.
 const mdLinks = (routes, options) => {
@@ -14,17 +14,36 @@ const mdLinks = (routes, options) => {
       // si la ruta es relativa, se vuelve absoluta
       const routeAbsolute = absolute(routes);
       console.log(routeAbsolute);
-     
-      fs.stat(routes, (err, stats) => {
+
+      fs.stat(routeAbsolute, (err, stats) => {
         if (err) {
           reject(err);
         } else {
-          
+
         } if (stats.isFile()) {
-          console.log('es un archivo', routes);
-          if (path.extname === '.md') {
-            console.log(file, 'es ms');
-        
+          console.log('es un archivo', routeAbsolute);
+          if (path.extname(routeAbsolute) === '.md') {
+            console.log(routeAbsolute, 'es md');
+            fs.readFile(routeAbsolute, 'utf8', (err, data) => {
+              if (err) throw err;
+              //console.log(data), 'es la lectura';
+              const regex = /^\[([\w\s\d]+)\]\(((?:\/|https?:\/\/)[\w\d./?=#]+)\)$/
+              const fullLinkOnlyRegex = /^\[([\w\s\d]+)\]\((https?:\/\/[\w\d./?=#]+)\)$/
+              const regexMdLinks = /\[([^\[]+)\](\(.*\))/gm
+              const ensayo = data.match(regexMdLinks);
+              //console.log(ensayo);
+              //const matches = mdContents.match(regexMdLinks)
+              console.log('links', ensayo)
+
+              const singleMatch = /\[([^\[]+)\]\((.*)\)/
+              for (var i = 0; i < ensayo.length; i++) {
+                var text = singleMatch.exec(ensayo[i])
+                console.log(`Match #${i}:`, text)
+                console.log(`Word  #${i}: ${text[1]}`)
+                console.log(`Link  #${i}: ${text[2]}`)
+              }
+            });
+
           } else {
             console.log('no es md');
           }
@@ -33,7 +52,7 @@ const mdLinks = (routes, options) => {
           console.log('es una carpeta', carpetas);
         }
         // para saber si es md
-        
+
 
 
       })
@@ -42,10 +61,10 @@ const mdLinks = (routes, options) => {
     }
   })
 
-} 
+}
 
-        
-  
+
+
 
 
 module.exports = {
