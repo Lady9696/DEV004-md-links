@@ -27,21 +27,28 @@ const mdLinks = (routes, options) => {
             fs.readFile(routeAbsolute, 'utf8', (err, data) => {
               if (err) throw err;
               //console.log(data), 'es la lectura';
-              const regex = /^\[([\w\s\d]+)\]\(((?:\/|https?:\/\/)[\w\d./?=#]+)\)$/
-              const fullLinkOnlyRegex = /^\[([\w\s\d]+)\]\((https?:\/\/[\w\d./?=#]+)\)$/
-              const regexMdLinks = /\[([^\[]+)\](\(.*\))/gm
+              
+              const regexMdLinks = /\[([^\]]+)]\((https?:\/\/[^\s)]+)\)/gm
+              //extraer de la data [texto](links)
               const ensayo = data.match(regexMdLinks);
               //console.log(ensayo);
               //const matches = mdContents.match(regexMdLinks)
-              console.log('links', ensayo)
-
+              //console.log('links', ensayo)
+              const arrObj = []
               const singleMatch = /\[([^\[]+)\]\((.*)\)/
               for (var i = 0; i < ensayo.length; i++) {
                 var text = singleMatch.exec(ensayo[i])
-                console.log(`Match #${i}:`, text)
+                
                 console.log(`Word  #${i}: ${text[1]}`)
                 console.log(`Link  #${i}: ${text[2]}`)
+                arrObj.push({
+                  href: text[2],
+                  text: text[1],
+                  
+                })
               }
+              console.log(arrObj);
+              
             });
 
           } else {
