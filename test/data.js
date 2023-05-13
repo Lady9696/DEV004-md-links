@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-
+const axios = require('axios');
 // Fucniòn para identificar si existe la ruta
 const existPath = (file) => {
   return fs.existsSync(file);
@@ -13,26 +13,28 @@ const absolute = (file) => {
   }
   return file
 }
-/*
-// Funciòn que identiifca si es un archivo 
-const isFile = (file) => {
-  fs.stat(file, (err, stats) => {
-    if (err) {
-      console.log(err);
-      
-    } else {
-      if(!stats.isFile(file)){
-        return isFile(file);
+// aquì estoy verificando si el link esta disponible o kha
+function checkLink(url) {
+  return new Promise((resolve, reject) => {
+    // aquì utilizo axios
+     return axios.get(url)
+      // la promesa
+      .then(response => {
+        if (response.status >= 200 && response.status <= 299) {
+          console.log(`${url} si funciona ${response.status}` );
+        } else if(response.status>= 100 && response.status <= 199){
+          console.log(`${url}  respuesta iformativacodigo ${response.status}`);
+        }
+      })
+      .catch(error => {
         
-      }
-     
-      //return 
-      //console.log(stats.isFile(file))
-    } 
-    
-  });
+          reject(`${url}  no está funcionando ${error.message}`);
+        
+        
+        
+      });
+  })
 }
-*/
 // Funciòn para identifar archivos md
 const identificatorMd = (file) => {
   if (path.extname === '.md') {
@@ -40,6 +42,9 @@ const identificatorMd = (file) => {
 
   }
 }
+
+
+// const markdownLinkExtractor = require('markdown-link-extractor');
 
 // funciòn para leer los archivos, debe ser una promesa
 
@@ -76,7 +81,7 @@ const identificator = (routes) => {
 */
 module.exports = {
   //identificator, 
-  existPath, absolute,
+  existPath, absolute, checkLink,
 };
 module.exports.fs = require("fs");
 module.exports.path = require("path");
