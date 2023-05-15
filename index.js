@@ -35,7 +35,7 @@ const mdLinks = (routes, options) => {
               //console.log(data), 'es la lectura';
 
               // esta funciòn me permite extaer los links e iterarlos
-              function processEnsayo(ensayo) {
+              function processEnsayo() {
                 // aquì saco el patron [texto](links)
                 const regexMdLinks = /\[([^\]]+)]\((https?:\/\/[^\s)]+)\)/gm
                 const singleMatch = /\[([^\[]+)\]\((.*)\)/
@@ -49,7 +49,7 @@ const mdLinks = (routes, options) => {
                 // Necesito crear dos objetos validate true y validate false
                 // para validate false, creo arrObjFalse
                // 
-                for (let i = 0; i < identificator.length; i++) {
+                for (let i = 1; i < identificator.length; i++) {
                   // para extraer el texto y los links del array 
                   const text = singleMatch.exec(identificator[i]);
 
@@ -60,10 +60,11 @@ const mdLinks = (routes, options) => {
                   arrObjFalse.push({
                     href: text[2],
                     text: text[1],
-                    absolutePath:routeAbsolute,
+                    file:routeAbsolute,
+                    
                   });
                   //esto hace parte del obajeto validate true
-                  links.push({ href: text[2] });
+                  links.push({ href: text[2], cantidad: i});
                   //console.log(arrObjFalse, 'esto es cuando validate es false');
                 }
                 // este return me sirve para poder usar los links que voy a validar en otra funciòn
@@ -75,12 +76,12 @@ const mdLinks = (routes, options) => {
               }
               // para hacer la peticiòn  http a los links
               // primero sew xtraen los links que voy a validar
-              let  ensayo = ["... texto con links ..."];
+              //let  ensayo = ["... texto con links ..."];
               // esta variable me devuelve los links como objeto con la propiedad hrf(el link)
               // al asignarsela a la variable result creo un obejto que contiene a links y este tiene la propiedad hrf
-              let result = processEnsayo(ensayo );
-              // aqui extraigo los links 
-              console.log( 'extraigo los links', result);
+              let result = processEnsayo(data);
+              console.log('es el data', result);
+              //console.log( 'extraigo los links', result);
              // aquì itero los links quee stan en el obejto result
               result.links.forEach(link => {
                 // se invoca la funciòn de la promesa
@@ -91,20 +92,7 @@ const mdLinks = (routes, options) => {
               //console.log(result.links, 'este es el intento de valdiate trur'); // Access the links array
               //console.log(arrObj);
 
-
-
-
-
-
-
-
-
-
-
             });
-
-
-
 
           } else {
             console.log('no es md');
@@ -114,8 +102,6 @@ const mdLinks = (routes, options) => {
           console.log('es una carpeta', carpetas);
         }
         // para saber si es md
-
-
 
       })
     } else {

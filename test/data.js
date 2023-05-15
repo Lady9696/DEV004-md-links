@@ -17,50 +17,37 @@ const absolute = (file) => {
 function checkLink(url) {
   return new Promise((resolve, reject) => {
     // aquì utilizo axios
-     return axios.get(url)
+    return axios.get(url)
       // la promesa
       .then(response => {
         if (response.status >= 200 && response.status <= 299) {
-          console.log(`${url} si funciona ${response.status}` );
-        } else if(response.status>= 100 && response.status <= 199){
+          console.log(`${url} si funciona ${response.status}`);
+        } else if (response.status >= 100 && response.status <= 199) {
           console.log(`${url}  respuesta iformativacodigo ${response.status}`);
+        } else if(response.status >= 300 && response.status <= 399) { 
+          console.log(`${url}  redirecciòn ${response.status}`);
+        } else {
+          console.log(`${url}  funcion pero no se cual es el response`);
         }
       })
       .catch(error => {
-        
-          reject(`${url}  no está funcionando ${error.message}`);
-        
-        
-        
+        if (error.response && error.response.status >= 400 &&  error.response.status <= 499) {
+
+          reject(`${url}  no está funcionando ${error.response.status}`);
+
+        } else if (error.response && error.response.status >= 500 &&  error.response.status <= 599) {
+          console.log(`${url} no está funcionando  ${error.response.status}`);
+        } else {
+          console.log(`${url} error what ${error.response}`);
+        }
+
       });
   })
 }
-// Funciòn para identifar archivos md
-const identificatorMd = (file) => {
-  if (path.extname === '.md') {
-    console.log(file);
 
-  }
-}
-
-
-// const markdownLinkExtractor = require('markdown-link-extractor');
-
-// funciòn para leer los archivos, debe ser una promesa
-
-
-
-
-
-//
-/*
 //hacer una funciòn para leer direcotrios
-const identificator = (routes) => {
-  //para identificar si es un directorio
-  fs.stat(routes, (err, stats) => {
-    if (err) {
-      reject(err); // TODO: reject no existe en este contexto
-    } else {
+const readDirectory= (routes) => {
+  
       if (!stats.isFile()) {
         do {
           const filenames = fs.readdirSync(__dirname);
@@ -76,8 +63,28 @@ const identificator = (routes) => {
         console.log("es un archivo");
       }
     }
-  });
-};
+ 
+
+/*
+// Funciòn para identifar archivos md
+const identificatorMd = (file) => {
+  if (path.extname(file) === '.md') {
+    console.log(file);
+
+  }
+}
+
+*/
+// const markdownLinkExtractor = require('markdown-link-extractor');
+
+// funciòn para leer los archivos, debe ser una promesa
+
+
+
+
+
+//
+
 */
 module.exports = {
   //identificator, 
