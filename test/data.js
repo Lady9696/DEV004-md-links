@@ -53,31 +53,31 @@ const readMd = (file) => {
 }
 
 // aquì estoy verificando si el link esta disponible o kha
-function checkLink(url) {
+function checkLink(url, cantidad) {
   return new Promise((resolve, reject) => {
     // aquì utilizo axios
     return axios.get(url)
       // la promesa
       .then(response => {
         if (response.status >= 200 && response.status <= 299) {
-          console.log(`${url} si funciona ${response.status}`);
+          resolve(`${url} ${cantidad} si funciona ${response.status}`);
         } else if (response.status >= 100 && response.status <= 199) {
-          console.log(`${url}  respuesta iformativacodigo ${response.status}`);
+          resolve(`${url} ${cantidad}  respuesta iformativacodigo ${response.status}`);
         } else if (response.status >= 300 && response.status <= 399) {
-          console.log(`${url}  redirecciòn ${response.status}`);
+          resolve(`${url} ${cantidad}  redirecciòn ${response.status}`);
         } else {
-          console.log(`${url}  funcion pero no se cual es el response`);
+          resolve(`${url} ${cantidad}  funcion pero no se cual es el response`);
         }
       })
       .catch(error => {
         if (error.response && error.response.status >= 400 && error.response.status <= 499) {
 
-          reject(`${url}  no está funcionando ${error.response.status}`);
+          reject(`${url} ${cantidad}  no está funcionando ${error.response.status}`);
 
         } else if (error.response && error.response.status >= 500 && error.response.status <= 599) {
-          console.log(`${url} no está funcionando  ${error.response.status}`);
+          reject(`${url} ${cantidad} no está funcionando  ${error.response.status}`);
         } else {
-          console.log(`${url} error what ${error.response}`);
+          reject(`${url} ${cantidad} error what ${error.response}`);
         }
 
       });

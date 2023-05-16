@@ -76,8 +76,9 @@ const mdLinks = (routes, options) => {
                   // aquì itero los links quee stan en el obejto result
                   result.links.forEach(link => {
                     // se invoca la funciòn de la promesa
-                    checkLink(link.href)
-                      .catch(error => console.error(error));
+                    checkLink(link.href, link.cantidad)
+                      .catch(error => console.error(error))
+                      .then((res) => console.log(res));
                   });
 
                 })
@@ -89,6 +90,7 @@ const mdLinks = (routes, options) => {
           } else {
             // aqui esta todos los archivos con md
             getAllFilesMd(routeAbsolute);
+
 
           }
 
