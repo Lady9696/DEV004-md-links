@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const axios = require('axios');
-const  error  = require("console");
+
 
 // Fucniòn para identificar si existe la ruta
 const existPath = (file) => {
@@ -18,10 +18,11 @@ const absolute = (file) => {
 // Funciòn para identifar archivos md
 const identificatorMd = (file) => {
   if (path.extname(file) === '.md') {
-    console.log(file, 'es md');
-    return true
+    //console.log(file, 'es md');
+    return file
 
   } else {
+    //console.log('no es md')
     return false
   }
 }
@@ -51,6 +52,7 @@ const readMd = (file) => {
   })
   
 }
+//esto me permite extraer los links
 function processEnsayo(data, route) {
   // aquì saco el patron [texto](links)
   const regexMdLinks = /\[([^\]]+)]\((https?:\/\/[^\s)]+)\)/gm
@@ -122,37 +124,8 @@ function checkLink(url, cantidad) {
       });
   })
 }
-/*
-let filesDirectory = [];
-//hacer una funciòn para leer direcotrios
-const readDirectory = (routes) => {
-  
-  fs.stat(routes, (err, stats) => {
-    if (err) throw err;
-    if(stats.isDirectory() === true){
-      const filenames = fs.readdirSync(routes);
-      //console.log(filenames);
-      filenames.forEach((item) => {
-        filesDirectory.push(item);
-
-        // console.log(filesDirectory, "esta es el archivo del directorio");
-        // readDirectory(item)
-      });
-      console.log(filesDirectory, 'estee');
-    }
-    // console.log(`stats: ${JSON.stringify(stats)}`);
-   
-      
-     
-      
-
-    
-    //console.log(filesDirectory);
-  })
 
 
-}
-*/
 //funciòn para leer todos los archivos de los directorios
 const getAllFilesMd = (dirPath, arrayOfFiles) => {
   files = fs.readdirSync(dirPath)
@@ -164,15 +137,11 @@ const getAllFilesMd = (dirPath, arrayOfFiles) => {
     } else {
       const filePath = path.join(dirPath, file);
       arrayOfFiles.push(filePath);
-      console.log(filePath);
-      //identificatorMd(filePath);
-     console.log(identificatorMd(filePath));
-     
-     //console.log(readMd(filePath));
-      
       
     }
+
   })
+  return arrayOfFiles
 }
 
 

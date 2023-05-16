@@ -4,7 +4,7 @@ const axios = require('axios');
 const { existPath, absolute, checkLink, getAllFilesMd, identificatorMd, readMd, getStats, processEnsayo } = require('./test/data');
 
 
-const { fs, path } = require('./test/data.js');
+//const { fs, path } = require('./test/data.js');
 1// se crea una funciòn que tiene routes y options como paàmetro, lo que me retorna una promesa
 //con dos valores   que son resolve y reject.
 const mdLinks = (routes, options) => {
@@ -48,9 +48,39 @@ const mdLinks = (routes, options) => {
               console.log('no es md');
             }
           } else {
-            // aqui esta todos los archivos con md
-            getAllFilesMd(routeAbsolute);
-            
+            // aqui esta todos los archivos  en un array
+            const directoryFiles = getAllFilesMd(routeAbsolute);
+            // console.log(directoryFiles, 'esto');
+            // itero los archivos 
+            directoryFiles.forEach((directoryFile) => {
+              if (identificatorMd(directoryFile)) {
+                // El archivo es un archivo Markdown (.md)
+                // Realiza las acciones que necesites con el archivo
+                console.log(directoryFile, 'es markdow');
+                //console.log(mdfile, 'cada uno de los archivos');
+                readMd(directoryFile)
+                  .then((data) => {
+                    console.log(data);
+                    
+                    /*
+                    let result = processEnsayo(data, routeAbsolute);
+                    console.log('data de carpetas');
+                    result.links.forEach((link) => {
+                      checkLink(link.href, link.cantidad)
+                        .catch((err) => console.err(err))
+                        .then((reso) => console.log(reso));
+    
+                    })
+                   */
+                  })
+                  .catch((error) => {
+                    console.error(error);
+
+                })
+
+              }
+
+            })
 
 
           }
