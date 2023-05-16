@@ -1,7 +1,7 @@
 // fs se debe usar para poder realizar las fucniones debemos 'importar' el mòdulo fs
 //const { identificator } = require('./test/data');
 const axios = require('axios');
-const { existPath, absolute, checkLink } = require('./test/data');
+const { existPath, absolute, checkLink, getAllFiles, identificatorMd} = require('./test/data');
 
 
 const { fs, path } = require('./test/data.js');
@@ -9,13 +9,14 @@ const { fs, path } = require('./test/data.js');
 //con dos valores   que son resolve y reject.
 const mdLinks = (routes, options) => {
   return new Promise((resolve, reject) => {
-
+    let filesindirectorio = [];
     // se verifica si la ruta existe
     if (existPath(routes)) {
       console.log('existe la ruta');
       // si la ruta es relativa, se vuelve absoluta
       const routeAbsolute = absolute(routes);
       console.log(routeAbsolute);
+      
       // esta funciòn em eprmite identificar si es un archivo o es un directorio
       fs.stat(routeAbsolute, (err, stats) => {
         if (err) {
@@ -25,7 +26,7 @@ const mdLinks = (routes, options) => {
         } if (stats.isFile()) {
           console.log('es un archivo', routeAbsolute);
           // Me permite saber si es un archivo md
-          if (path.extname(routeAbsolute) === '.md') {
+          if (identificatorMd(routeAbsolute)) {
             console.log(routeAbsolute, 'es md');
             // Para leer archivos md
             // el 'utf8' me permite obtener el string
@@ -98,8 +99,18 @@ const mdLinks = (routes, options) => {
             console.log('no es md');
           }
         } else {
-          let carpetas = []
-          console.log('es una carpeta', carpetas);
+          // aqui esta todos los archivos con md
+          const allFilesMd = getAllFiles(routeAbsolute);
+          console.log(allFilesMd);
+          /*
+          if(identificatorMd(routeAbsolute)){
+            filesindirectorio.push(routeAbsolute)
+            console.log('es md', filesindirectorio);
+          } else {
+            console.log('no es md', routeAbsolute);
+          }
+          */
+          
         }
         // para saber si es md
 
