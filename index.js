@@ -1,7 +1,7 @@
 // fs se debe usar para poder realizar las fucniones debemos 'importar' el mòdulo fs
 //const { identificator } = require('./test/data');
 const axios = require('axios');
-const { existPath, absolute, checkLink, getAllFiles, identificatorMd} = require('./test/data');
+const { existPath, absolute, checkLink, getAllFilesMd, identificatorMd , readMd}  = require('./test/data');
 
 
 const { fs, path } = require('./test/data.js');
@@ -9,7 +9,7 @@ const { fs, path } = require('./test/data.js');
 //con dos valores   que son resolve y reject.
 const mdLinks = (routes, options) => {
   return new Promise((resolve, reject) => {
-    let filesindirectorio = [];
+    //let filesindirectorio = [];
     // se verifica si la ruta existe
     if (existPath(routes)) {
       console.log('existe la ruta');
@@ -100,8 +100,9 @@ const mdLinks = (routes, options) => {
           }
         } else {
           // aqui esta todos los archivos con md
-          const allFilesMd = getAllFiles(routeAbsolute);
-          console.log(allFilesMd);
+           getAllFilesMd(routeAbsolute);
+          //console.log(getAllFilesMd(routeAbsolute) ,'no es un string');
+          
           /*
           if(identificatorMd(routeAbsolute)){
             filesindirectorio.push(routeAbsolute)

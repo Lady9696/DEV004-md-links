@@ -24,6 +24,16 @@ const identificatorMd = (file) => {
     return false
   }
 }
+// leer archivos md 
+const readMd = (file) => {
+  fs.readFile(file, 'utf8', (err, data) => {
+    if (err) {
+      console.error(err)
+    } else 
+    console.log(data);
+  });
+}
+
 // aquì estoy verificando si el link esta disponible o kha
 function checkLink(url) {
   return new Promise((resolve, reject) => {
@@ -87,17 +97,23 @@ const readDirectory = (routes) => {
 }
 */
 //funciòn para leer todos los archivos de los directorios
-const getAllFiles = (dirPath, arrayOfFiles) => {
+const getAllFilesMd = (dirPath, arrayOfFiles) => {
   files = fs.readdirSync(dirPath)
   arrayOfFiles = arrayOfFiles || []
 
   files.forEach(function(file) {
     if (fs.statSync(dirPath + "/" + file).isDirectory()) {
-      arrayOfFiles = getAllFiles(dirPath + "/" + file, arrayOfFiles)
+      arrayOfFiles = getAllFilesMd(dirPath + "/" + file, arrayOfFiles)
     } else {
-      const filePath = path.join(__dirname, dirPath, "/", file);
+      const filePath = path.join(dirPath, file);
       arrayOfFiles.push(filePath);
-      identificatorMd(filePath);
+      console.log(filePath);
+      //identificatorMd(filePath);
+     console.log(identificatorMd(filePath));
+     
+     console.log(readMd(filePath));
+      
+      
     }
   })
 }
@@ -159,7 +175,7 @@ const readDirectory = (routes) => {
 
 module.exports = {
   //identificator, 
-  existPath, absolute, checkLink,getAllFiles , identificatorMd  //readDirectory, identificatorMd,
+  existPath, absolute, checkLink, getAllFilesMd , identificatorMd, readMd //readDirectory, identificatorMd,
 };
 module.exports.fs = require("fs");
 module.exports.path = require("path");
