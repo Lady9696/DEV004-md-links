@@ -2,7 +2,7 @@ const { mdLinks } = require ('./index.js');
 //const { mdLinks } = require ('./test/README.md');
 //aqui anido la promesa anterior
 // false con archivos
-mdLinks('./prueba')
+mdLinks('./test/README.md')
 .then(( arrObjFalse)=>{
     [{ href, text, file }]
     // 

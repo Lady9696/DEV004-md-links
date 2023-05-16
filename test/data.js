@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const axios = require('axios');
+const  error  = require("console");
 
 // Fucniòn para identificar si existe la ruta
 const existPath = (file) => {
@@ -24,14 +25,31 @@ const identificatorMd = (file) => {
     return false
   }
 }
+// 
+const getStats = (route) => {
+  return new Promise ((resolve, reject) => {
+
+    fs.stat(route, (err, stats) => {
+      if (err){
+       reject(err)
+      } else {
+        resolve(stats)
+      }
+
+  });
+})
+}
 // leer archivos md 
 const readMd = (file) => {
-  fs.readFile(file, 'utf8', (err, data) => {
-    if (err) {
-      console.error(err)
-    } else 
-    console.log(data);
-  });
+  return new Promise ( (resolve, reject) => {
+    fs.readFile(file, 'utf8', (err, data) => {
+      if (err) {
+        reject(err)
+      } else 
+      resolve(data)
+    });
+  })
+  
 }
 
 // aquì estoy verificando si el link esta disponible o kha
@@ -111,71 +129,19 @@ const getAllFilesMd = (dirPath, arrayOfFiles) => {
       //identificatorMd(filePath);
      console.log(identificatorMd(filePath));
      
-     console.log(readMd(filePath));
+     //console.log(readMd(filePath));
       
       
     }
   })
 }
 
-/*
-//hacer una funciòn para leer direcotrios
-const readDirectory = (routes) => {
-let filesDirectory =[];
 
-
-  fs.stat(routes, (err, stats) => {
-    if (err) throw err;
-    // console.log(`stats: ${JSON.stringify(stats)}`);
-    do {
-      const filenames = fs.readdirSync(routes);
-      filenames.forEach((files) => {
-        filesDirectory.push(files);
-        console.log(filesDirectory, "esta es el archivo del directorio");
-
-      });
-    } while (stats.isDirectory(),true);
-
-  })
-
-
-}
-
-
-const fs = require('fs');
-
-const readDirectory = (routes) => {
-  fs.stat(routes, (err, stats) => {
-    if (err) throw err;
-
-    if (stats.isDirectory()) {
-      fs.readdir(routes, (err, filenames) => {
-        if (err) throw err;
-
-        filenames.forEach((filename) => {
-          console.log(filename, "es un archivo del directorio");
-        });
-      });
-    }
-  });
-};
-
-
-
-// const markdownLinkExtractor = require('markdown-link-extractor');
-
-// funciòn para leer los archivos, debe ser una promesa
-
-
-
-
-
-*/
 
 
 module.exports = {
   //identificator, 
-  existPath, absolute, checkLink, getAllFilesMd , identificatorMd, readMd //readDirectory, identificatorMd,
+  existPath, absolute, checkLink, getAllFilesMd , identificatorMd, readMd, getStats//readDirectory, identificatorMd,
 };
 module.exports.fs = require("fs");
 module.exports.path = require("path");
