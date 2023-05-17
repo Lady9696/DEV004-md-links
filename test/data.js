@@ -67,7 +67,7 @@ function processEnsayo(data, route) {
   // Necesito crear dos objetos validate true y validate false
   // para validate false, creo arrObjFalse
   // 
-  for (let i = 1; i < identificator.length; i++) {
+  for (let i = 0; i < identificator.length; i++) {
     // para extraer el texto y los links del array 
     const text = singleMatch.exec(identificator[i]);
 
@@ -90,6 +90,7 @@ function processEnsayo(data, route) {
     //arrObjFalse: arrObjFalse,
     links: links
   };
+  
 
 }
 

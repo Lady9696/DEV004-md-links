@@ -60,23 +60,18 @@ const mdLinks = (routes, options) => {
                 //console.log(mdfile, 'cada uno de los archivos');
                 readMd(directoryFile)
                   .then((data) => {
-                    console.log(data);
-                    
-                    /*
-                    let result = processEnsayo(data, routeAbsolute);
+                                        
+                    let result2 = processEnsayo(data, routeAbsolute);
                     console.log('data de carpetas');
-                    result.links.forEach((link) => {
+                    result2.links.forEach((link) => {
                       checkLink(link.href, link.cantidad)
                         .catch((err) => console.err(err))
                         .then((reso) => console.log(reso));
     
                     })
-                   */
+                   
                   })
-                  .catch((error) => {
-                    console.error(error);
-
-                })
+                 
 
               }
 
