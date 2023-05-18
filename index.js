@@ -2,7 +2,7 @@
 //const { identificator } = require('./test/data');
 const axios = require('axios');
 const { existPath, absolute, checkLink, getAllFilesMd, identificatorMd, readMd, getStats, processEnsayo } = require('./test/data');
-
+//const { mdLinks } = require ('./cli.js')
 
 //const { fs, path } = require('./test/data.js');
 1// se crea una funciòn que tiene routes y options como paàmetro, lo que me retorna una promesa
@@ -31,7 +31,7 @@ const mdLinks = (routes, options) => {
                 .then((data) => {
                   // esta funciòn me permite extaer los links e iterarlos
                   let result = processEnsayo(data, routeAbsolute);
-                  console.log('debe funcionar', result); 
+                  //console.log('debe funcionar', result); 
                   //console.log( 'extraigo los links', result);
                   // aquì itero los links quee stan en el obejto result
                   result.links.forEach(link => {

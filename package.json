@@ -12,6 +12,10 @@
     "version": "5.6.0",
     "commit": "ffa75c8b2bede153844195479abeff01f3e34227"
   },
+  
+  "bin": {
+    "mdlinks": "./cli.js"
+  },
   "dependencies": {
     "axios": "^1.4.0",
     "jest": "^29.5.0"

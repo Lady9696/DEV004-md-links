@@ -98,7 +98,7 @@ function checkLink(url, text, file) {
     //armando el objeto
     // la promesa
       .then(response => {
-        console.log(response.status, 'este es el response');
+        //console.log(response.status, 'este es el response');
         const result = {
           href: url,
           file: file,
@@ -109,18 +109,22 @@ function checkLink(url, text, file) {
         };
         if (response.status >= 200 && response.status <= 299) {
           resolve(result);
+          return result
           //console.log(result);
           
         } else if (response.status >= 100 && response.status <= 199) {
           resolve(result);
+          return result
           //console.log(result);
         } else if (response.status >= 300 && response.status <= 399) {
           resolve(result);
           //console.log(result);
+          return result
         } else {
 
           resolve(result);
           //console.log(result);
+          return result
         }
       })
       .catch(error => {
@@ -135,14 +139,17 @@ function checkLink(url, text, file) {
         
         if (error.response && error.response.status >= 400 && error.response.status <= 499) {
           //console.log(error.response.status,'error');
-          console.log(error.sta, 'el obejto error');
+          //console.log(error.sta, 'el obejto error');
 
           reject(result2);
+          return result2
 
         } else if (error.response && error.response.status >= 500 && error.response.status <= 599) {
           reject(result2);
+          return result2
         } else {
           reject(result2);
+          return result2
         }
 
       });
