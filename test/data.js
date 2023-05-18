@@ -104,7 +104,7 @@ function checkLink(url, text, file) {
           file: file,
           text:text,
           status: response.status,
-          statusText: response.statusText,
+          ok: response.statusText,
           
         };
         if (response.status >= 200 && response.status <= 299) {
@@ -129,7 +129,7 @@ function checkLink(url, text, file) {
           file: file,
           text: text,
           status: error.response ? error.response.status : '404',
-          statusText: error.response ? error.response.statusText : 'fail',
+          ok: error.response ? error.response.statusText : 'fail',
         };
           
         
