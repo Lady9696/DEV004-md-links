@@ -124,14 +124,23 @@ function checkLink(url, text, file) {
         }
       })
       .catch(error => {
+        const result = {
+          href: url,
+          file: file,
+          text: text,
+          status: error.response.status ?? 0,
+          statusText: error.response.statusText ?? 'fail',
+        };
+          
+        
         if (error.response && error.response.status >= 400 && error.response.status <= 499) {
 
-          reject(`${url} no está funcionando ${error.response.status}`);
+          reject(result);
 
         } else if (error.response && error.response.status >= 500 && error.response.status <= 599) {
-          reject(`${url}  no está funcionando  ${error.response.status}`);
+          reject(result);
         } else {
-          reject(`${url}  error what ${error.response}`);
+          reject(result);
         }
 
       });
