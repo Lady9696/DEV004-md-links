@@ -2,7 +2,7 @@ const { mdLinks } = require ('./index.js');
 //const { mdLinks } = require ('./test/README.md');
 //aqui anido la promesa anterior
 // false con archivos
-mdLinks('./prueba')
+mdLinks('./test/README.md')
 .then(( arrObjFalse)=>{
   [{ href, text, file }]
 //     // 
@@ -14,12 +14,12 @@ mdLinks('./prueba')
 
  });
 
-//console.log(process.argv);
-/*
+console.log(process.argv);
+
 if(process.argv.includes('-validate')|| process.argv.includes('-v')){
 // llmar a mdLinks para que devuelva {´hrf, statu...}
 console.log('Aqui validate true');
 }
 
 
-*/
+

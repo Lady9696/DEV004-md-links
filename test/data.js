@@ -67,7 +67,7 @@ function processEnsayo(data, route) {
   
   let arrObjFalse = [];
   let links = [];
-  
+  //console.log(identificator, 'este es el extractor d elinks');
   for (let i = 0; i < identificator.length; i++) {
     const text = singleMatch.exec(identificator[i]);
     arrObjFalse.push({
@@ -75,40 +75,63 @@ function processEnsayo(data, route) {
       text: text[1],
       file: route,
     });
-    links.push({ href: text[2], cantidad: i });
+    //console.log(arrObjFalse.file, 'esto es la ruta');
+    links.push({ href: text[2], text: text[1], file: route,});
+    
+    
   }
+  //console.log('si diò',links, 'a que de');
   
   return {
     links: links
   };
+  
 }
 
 // aquì estoy verificando si el link esta disponible o kha
-function checkLink(url, cantidad) {
+function checkLink(url, text, file) {
+  //let objectTrue = [];
   return new Promise((resolve, reject) => {
+
     // aquì utilizo axios
     return axios.get(url)
-      // la promesa
+    //armando el objeto
+    // la promesa
       .then(response => {
+        console.log(response.status, 'este es el response');
+        const result = {
+          href: url,
+          file: file,
+          text:text,
+          status: response.status,
+          statusText: response.statusText,
+          
+        };
         if (response.status >= 200 && response.status <= 299) {
-          resolve(`${url} ${cantidad} si funciona ${response.status}`);
+          resolve(result);
+          //console.log(result);
+          
         } else if (response.status >= 100 && response.status <= 199) {
-          resolve(`${url} ${cantidad}  respuesta iformativacodigo ${response.status}`);
+          resolve(result);
+          //console.log(result);
         } else if (response.status >= 300 && response.status <= 399) {
-          resolve(`${url} ${cantidad}  redirecciòn ${response.status}`);
+          resolve(result);
+          //console.log(result);
         } else {
-          resolve(`${url} ${cantidad}  funcion pero no se cual es el response`);
+
+          resolve(result);
+          //console.log(result);
         }
       })
       .catch(error => {
         if (error.response && error.response.status >= 400 && error.response.status <= 499) {
 
-          reject(`${url} ${cantidad}  no está funcionando ${error.response.status}`);
+          reject(`${url} no está funcionando ${error.response.status}`);
 
         } else if (error.response && error.response.status >= 500 && error.response.status <= 599) {
-          reject(`${url} ${cantidad} no está funcionando  ${error.response.status}`);
+          reject(`${url}  no está funcionando  ${error.response.status}`);
         } else {
-          reject(`${url} ${cantidad} error what ${error.response}`);
+          reject(`${url}  error what ${error.response}`);
         }
 
       });

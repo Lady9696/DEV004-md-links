@@ -30,15 +30,18 @@ const mdLinks = (routes, options) => {
               readMd(routeAbsolute)
                 .then((data) => {
                   // esta funciòn me permite extaer los links e iterarlos
-                  let result = processEnsayo(data);
-                  console.log('es el data', result);
+                  let result = processEnsayo(data, routeAbsolute);
+                  console.log('debe funcionar', result); 
                   //console.log( 'extraigo los links', result);
                   // aquì itero los links quee stan en el obejto result
                   result.links.forEach(link => {
                     // se invoca la funciòn de la promesa
-                    checkLink(link.href, link.cantidad)
+                    checkLink(link.href, link.text, link.file)
+                    
+                    
                       .catch(error => console.error(error))
                       .then((res) => console.log(res));
+                      
                   });
 
                 })
@@ -61,20 +64,43 @@ const mdLinks = (routes, options) => {
                 readMd(directoryFile)
                   .then((data) => {
                     let result2 = processEnsayo(data);
+                    console.log(result2,'result1');
                     //console.log('es el data', result2);
                     //console.log( 'extraigo los links', result);
                     // aquì itero los links quee stan en el obejto result
-                    result2.links.forEach(link => {
-                      // se invoca la funciòn de la promesa
-                      checkLink(link.href, link.cantidad)
-                        .catch(error => console.error(error))
-                        .then((res) => console.log(res));
-                    });
+                    //promise. all necesita una rreglo de promesas
+                    //.then arreglo de resultados)
                     
-                                      
+                    const promisesArray = result2.links.map((link, index, array) => {
+                     // console.log(link.route, 'link file');
+                      //console.log(link.href, 'link hrfe');
+                      //console.log(link.text, 'link text');
+                      return checkLink(link.href, link.text, link.route)
+                      
+
+                    })
+                    console.log(promisesArray, 'promedas');
+                    Promise.allSettled(promisesArray)
+                    .then((respuestas) => {
+                      console.log({respuestas}, 'respuestas');
+
+                    })
+                    .catch((error) =>{
+                      console.error({error});
+
+                    })
+                    /*
+                                        result2.links.forEach(link => {
+                                          // se invoca la funciòn de la promesa
+                                          
+                                            .catch(error => console.error(error))
+                                            .then((res) => console.log(res));
+                                        });
+                                       */
+
                   })
-                  
-                  
+
+
 
               }
 
