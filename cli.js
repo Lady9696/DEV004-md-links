@@ -16,7 +16,7 @@ mdLinks('./test/README.md')
 
 console.log(process.argv);
 
-if(process.argv.includes('-validate')|| process.argv.includes('-v')){
+if(process.argv.includes('--validate')|| process.argv.includes('-v')){
 // llmar a mdLinks para que devuelva {´hrf, statu...}
 console.log('Aqui validate true');
 }

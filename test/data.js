@@ -124,23 +124,25 @@ function checkLink(url, text, file) {
         }
       })
       .catch(error => {
-        const result = {
+        const result2 = {
           href: url,
           file: file,
           text: text,
-          status: error.response.status ?? 0,
-          statusText: error.response.statusText ?? 'fail',
+          status: error.response ? error.response.status : '404',
+          statusText: error.response ? error.response.statusText : 'fail',
         };
           
         
         if (error.response && error.response.status >= 400 && error.response.status <= 499) {
+          //console.log(error.response.status,'error');
+          console.log(error.sta, 'el obejto error');
 
-          reject(result);
+          reject(result2);
 
         } else if (error.response && error.response.status >= 500 && error.response.status <= 599) {
-          reject(result);
+          reject(result2);
         } else {
-          reject(result);
+          reject(result2);
         }
 
       });
