@@ -35,12 +35,16 @@ const mdLinks = (routes, options) => {
                   //console.log( 'extraigo los links', result);
                   // aquì itero los links quee stan en el obejto result
                   result.links.forEach(link => {
+                    
                     // se invoca la funciòn de la promesa
                     checkLink(link.href, link.text, link.file)
                     
                     
                       .catch(error => console.error(error))
                       .then((res) => console.log(res));
+                    
+                      console.log(link.href, link.text, link.file);
+                    
                       
                   });
 

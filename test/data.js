@@ -111,22 +111,13 @@ function checkLink(url, text, file) {
        const show = Object.values(result);
         
         if (response.status >= 200 && response.status <= 299) {
+          //resolve(show);
           resolve(show);
-          //return result
           //console.log(result);
-          
-        } else if (response.status >= 100 && response.status <= 199) {
-          resolve(show);
-          //return result
-          //console.log(result);
-        } else if (response.status >= 300 && response.status <= 399) {
-          resolve(show);
-          //return result
-          //return result
         } else {
 
           resolve(show);
-          //return result
+         // return show
         }
       })
       .catch(error => {
@@ -138,8 +129,10 @@ function checkLink(url, text, file) {
           ok: error.response ? error.response.statusText : 'fail',
         };
           const showError =  Object.values(result2);
-        
-        reject(showError);
+
+        if ()
+          reject(showError );
+        //return showError
 
       });
   })
