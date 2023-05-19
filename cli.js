@@ -18,7 +18,7 @@ const { argv } = require('node:process');
   const isValidate = argv.includes('--validate') || argv.includes('-v');
   
   // Llama a la función mdLinks y maneja los resultados y errores
-  mdLinks()
+  mdLinks('./index.js')
     .then((result) => {
       // Maneja los resultados
       console.log(result);
@@ -27,7 +27,7 @@ const { argv } = require('node:process');
       // Maneja los errores
       console.error(error);
     });
-  */
+  
  /*
  const isValidate = argv[2];
  if(isValidate.includes('--validate') || argv.includes('-v')){
