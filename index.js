@@ -11,7 +11,7 @@ const mdLinks = (routes, options) => {
   return new Promise((resolve, reject) => {
     //let filesindirectorio = [];
     // se verifica si la ruta existe
-    
+
     if (existPath(routes)) {
       console.log('existe la ruta');
       // si la ruta es relativa, se vuelve absoluta
@@ -32,24 +32,53 @@ const mdLinks = (routes, options) => {
                 .then((data) => {
                   // esta funciòn me permite extaer los links e iterarlos
                   let result = processEnsayo(data, routeAbsolute);
+
                   //console.log('debe funcionar', result); 
                   //console.log( 'extraigo los links', result);
                   // aquì itero los links quee stan en el obejto result
-                  result.links.forEach(link => {
-                    
-                    // se invoca la funciòn de la promesa
-                    checkLink(link.href, link.text, link.file)
-                    
-                    
-                      .catch(error => console.error(error))
-                      .then((res) => console.log(res));
-                    
-                      //console.log(link.href, link.text, link.file);
-                    
-                      
-                  });
+                  const promisesArray = result.links.map((link, index, array) => {
+                    // console.log(link.route, 'link file');
+                    //console.log(link.href, 'link hrfe');
+                    //console.log(link.text, 'link text');
+                    //console.log(checkLink(link.href, link.text, link.route));
+                    return checkLink(link.href, link.text, link.route)
+                    .then((respuestas) => {
+                      // resolve({respuestas}, 'holaaaaaaaaaaa');
+                      console.log({ respuestas }, 'holaaaaaaaaaaa');
+                      console.log(respuestas, 'mklsdmznmcvk');
 
-                })
+                    })
+                    .catch((error) => {
+                      console.error(error);
+                      //reject({error});
+
+                    })
+
+
+                  })
+                  //console.log(promisesArray, 'promedas');
+                  
+                  Promise.allSettled(promisesArray)
+                  console.log(Promise.allSettled(promisesArray))
+                    .then((respuestas) => {
+                      // resolve({respuestas}, 'holaaaaaaaaaaa');
+                      console.log({ respuestas }, 'holaaaaaaaaaaa');
+                      console.log(respuestas, 'mklsdmznmcvk');
+
+                    })
+                    .catch((error) => {
+                      console.error(error);
+                      //reject({error});
+
+                    })
+
+
+                  //console.log(link.href, link.text, link.file);
+
+
+                });
+
+
 
 
             } else {
@@ -75,27 +104,27 @@ const mdLinks = (routes, options) => {
                     // aquì itero los links quee stan en el obejto result
                     //promise. all necesita una rreglo de promesas
                     //.then arreglo de resultados)
-                    
+
                     const promisesArray = result2.links.map((link, index, array) => {
-                     // console.log(link.route, 'link file');
+                      // console.log(link.route, 'link file');
                       //console.log(link.href, 'link hrfe');
                       //console.log(link.text, 'link text');
                       return checkLink(link.href, link.text, link.route)
-                      
+
 
                     })
                     //console.log(promisesArray, 'promedas');
                     Promise.allSettled(promisesArray)
-                    .then((respuestas) => {
-                     // resolve({respuestas}, 'holaaaaaaaaaaa');
-                     console.log({respuestas}, 'holaaaaaaaaaaa');
+                      .then((respuestas) => {
+                        // resolve({respuestas}, 'holaaaaaaaaaaa');
+                        console.log({ respuestas }, 'holaaaaaaaaaaa');
 
-                    })
-                    .catch((error) =>{
-                      console.error(error);
-                      //reject({error});
+                      })
+                      .catch((error) => {
+                        console.error(error);
+                        //reject({error});
 
-                    })
+                      })
                     /*
                                         result2.links.forEach(link => {
                                           // se invoca la funciòn de la promesa
@@ -118,7 +147,7 @@ const mdLinks = (routes, options) => {
 
         })
       //tabnine
-      
+
     } else {
       reject('la ruta no existe');
     }
