@@ -1,7 +1,7 @@
 {
   "name": "md-links",
   "version": "0.1.0",
-    "engines": {
+  "engines": {
     "node": ">=16.x"
   },
   "scripts": {
@@ -12,9 +12,8 @@
     "version": "5.6.0",
     "commit": "ffa75c8b2bede153844195479abeff01f3e34227"
   },
-  
   "bin": {
-    "mdlinks": "./cli.js"
+    "md-links": "./cli.js"
   },
   "dependencies": {
     "axios": "^1.4.0",

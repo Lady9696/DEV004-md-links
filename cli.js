@@ -9,7 +9,7 @@ const mdLinks = require("./index.js");
 
 
 //const arguments = process.argv;
-//console.log(argv);
+//console.log( arguments );
 const isValidate = process.argv;
 if(isValidate.includes('--validate')||isValidate.includes('-v')){
   console.log({isValidate});
