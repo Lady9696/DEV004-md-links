@@ -1,5 +1,7 @@
 #!/usr/bin/env node
-const mdLinks = require("./index.js");
+const { mdLinks } = require("./index.js");
+const { argv } = require('node:process');
+//const mdLinks = require("./test/README.md");
 //import { argv } from 'node:process';
 
 
@@ -9,26 +11,38 @@ pathInput = process.argv[2];
 
 //const arguments = process.argv;
 //console.log( arguments );
-const isValidate = process.argv;
-/*if(isValidate.includes('--validate')||isValidate.includes('-v')){
-  //console.log({isValidate});
-  mdLinks(pathInput);
-.then(( result ) => {
-  [{ href, text, file }]
+//ShowObject = {
+  
 
-  console.log('resultadoooooooooooooooooooooooooooooooooooooooooooooooooo',href);
+//}
+const isValidate = argv;
+if (isValidate.includes('--validate')||isValidate.includes('-v')){
+  console.log('validate es true', isValidate);
+  mdLinks(pathInput)
+.then(( resultado ) => {
+ // console.log(Object.values(resultado));
+ 
+ 
+
+  //console.log('resultadoooooooooooooooooooooooooooooooooooooooooooooooooo',result);
 })
 .catch((error) => {
    console.log(error)
 
  });
- 
+} else{
+  console.log('Comando invàlido');
 }
+
+console.log({pathInput});
+
+  //console.log({isValidate});
+ 
 //console.log(process);
 
 // llmar a mdLinks para que devuelva {´hrf, statu...}
 //console.log(`hello world${args}`);
-
+/*
 mdLinks('./test/README.md')
 .then(( result )=>{
   [{ href, text, file }]

@@ -123,9 +123,7 @@ const mdLinks = (routes, options) => {
 
 
 
-module.exports = {
-  mdLinks
-};
+exports.mdLinks = mdLinks;
 
 
 
