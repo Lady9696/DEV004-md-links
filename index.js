@@ -11,6 +11,7 @@ const mdLinks = (routes, options) => {
   return new Promise((resolve, reject) => {
     //let filesindirectorio = [];
     // se verifica si la ruta existe
+    
     if (existPath(routes)) {
       console.log('existe la ruta');
       // si la ruta es relativa, se vuelve absoluta
@@ -43,7 +44,7 @@ const mdLinks = (routes, options) => {
                       .catch(error => console.error(error))
                       .then((res) => console.log(res));
                     
-                      console.log(link.href, link.text, link.file);
+                      //console.log(link.href, link.text, link.file);
                     
                       
                   });
@@ -68,7 +69,7 @@ const mdLinks = (routes, options) => {
                 readMd(directoryFile)
                   .then((data) => {
                     let result2 = processEnsayo(data);
-                    console.log(result2,'result1');
+                    //console.log(result2,'result1');
                     //console.log('es el data', result2);
                     //console.log( 'extraigo los links', result);
                     // aquì itero los links quee stan en el obejto result
@@ -83,14 +84,16 @@ const mdLinks = (routes, options) => {
                       
 
                     })
-                    console.log(promisesArray, 'promedas');
+                    //console.log(promisesArray, 'promedas');
                     Promise.allSettled(promisesArray)
                     .then((respuestas) => {
-                      console.log({respuestas}, 'respuestas');
+                     // resolve({respuestas}, 'holaaaaaaaaaaa');
+                     console.log({respuestas}, 'holaaaaaaaaaaa');
 
                     })
                     .catch((error) =>{
-                      console.error({error});
+                      console.error(error);
+                      //reject({error});
 
                     })
                     /*
@@ -115,7 +118,7 @@ const mdLinks = (routes, options) => {
 
         })
       //tabnine
-
+      
     } else {
       reject('la ruta no existe');
     }

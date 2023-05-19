@@ -111,13 +111,13 @@ function checkLink(url, text, file) {
         const show = Object.values(result);
 
         if (response.status >= 200 && response.status <= 299) {
+         return show
           //resolve(show);
-          resolve(show);
           //console.log(result);
         } else {
 
-          resolve(show);
-          // return show
+          //resolve(show);
+          return show
         }
       })
       .catch(error => {
@@ -128,21 +128,23 @@ function checkLink(url, text, file) {
           status: error.response ? error.response.status : '404',
           ok: error.response ? error.response.statusText : 'fail',
         };
+        const showError = Object.values(result2);
         if (error.response && error.response.status >= 400 && error.response.status <= 499) {
           //console.log(error.response.status,'error');
           //console.log(error.sta, 'el obejto error');
 
-          reject(showError);
-          //return result2
+          //reject(showError);
+          return showError
 
         } else if (error.response && error.response.status >= 500 && error.response.status <= 599) {
-          reject(showError);
+          return showError
+          //reject(showError);
           //return result2
         } else {
-          reject(showError);
-          // return result2
+          //reject(showError);
+          return showError
         }
-        const showError = Object.values(result2);
+        
 
 
         //return showError

@@ -6,34 +6,50 @@ const { argv } = require('node:process');
 
 
 // Aquì capturo la ruta del usuario
-pathInput = process.argv[2];
+//pathInput = process.argv[2];
 
 
 //const arguments = process.argv;
 //console.log( arguments );
 //ShowObject = {
+  const pathInput = process.argv[2];
+
+  // Verifica si se proporcionó la opción de validación (--validate o -v)
+  const isValidate = argv.includes('--validate') || argv.includes('-v');
   
-
-//}
-const isValidate = argv.includes('--validate')||argv.includes('-v')
-if (isValidate){
-  //console.log('validate es true', isValidate);
-  mdLinks(pathInput, { validate: true })
-.then(( resultado ) => {
- 
-  console.log(resultado);
- 
-
+  // Llama a la función mdLinks y maneja los resultados y errores
+  mdLinks()
+    .then((result) => {
+      // Maneja los resultados
+      console.log(result);
+    })
+    .catch((error) => {
+      // Maneja los errores
+      console.error(error);
+    });
+  */
+ /*
+ const isValidate = argv[2];
+ if(isValidate.includes('--validate') || argv.includes('-v')){
   
-})
-.catch((error) => {
-   console.log(error)
-
- });
-} else{
-  console.log('Comando invàlido');
-}
-
-console.log({pathInput});
-
+  mdLinks(pathInput, { validate: isValidate })
+    .then((result) => {
+      // Realiza acciones con el resultado
+      console.log('Los resultados son:', result);
+      // Llama a otra función y pasa el resultado como argumento
+      
+    })
+    .catch((error) => {
+      // Maneja los errores
+      console.error('Ocurrió un error:', error);
+    });
+  } else {
+    console.log('comando ivalido');
+  }
+  
+  
+  
+  
+  */
+  
   
