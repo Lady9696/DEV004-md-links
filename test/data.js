@@ -56,7 +56,7 @@ const readMd = (file) => {
 function processEnsayo(data, route) {
   const regexMdLinks = /\[([^\]]+)]\((https?:\/\/[^\s)]+)\)/gm
   const singleMatch = /\[([^\[]+)\]\((.*)\)/
-  
+
   const identificator = data.match(regexMdLinks);
   if (identificator === null) {
     console.log(`No se encontraron enlaces en el archivo `);
@@ -64,7 +64,7 @@ function processEnsayo(data, route) {
       links: []
     };
   }
-  
+
   let arrObjFalse = [];
   let links = [];
   //console.log(identificator, 'este es el extractor d elinks');
@@ -76,16 +76,16 @@ function processEnsayo(data, route) {
       file: route,
     });
     //console.log(arrObjFalse.file, 'esto es la ruta');
-    links.push({ href: text[2], text: text[1], file: route,});
-    
-    
+    links.push({ href: text[2], text: text[1], file: route, });
+
+
   }
   //console.log('si diò',links, 'a que de');
-  
+
   return {
     links: links
   };
-  
+
 }
 
 // aquì estoy verificando si el link esta disponible o kha
@@ -95,21 +95,21 @@ function checkLink(url, text, file) {
 
     // aquì utilizo axios
     return axios.get(url)
-    //armando el objeto
-    // la promesa
+      //armando el objeto
+      // la promesa
       .then(response => {
         //console.log(response.status, 'este es el response');
         const result = {
           href: url,
           file: file,
-          text:text,
+          text: text,
           status: response.status,
           ok: response.statusText,
-          
+
         };
         // saco los values 
-       const show = Object.values(result);
-        
+        const show = Object.values(result);
+
         if (response.status >= 200 && response.status <= 299) {
           //resolve(show);
           resolve(show);
@@ -117,7 +117,7 @@ function checkLink(url, text, file) {
         } else {
 
           resolve(show);
-         // return show
+          // return show
         }
       })
       .catch(error => {
@@ -128,10 +128,23 @@ function checkLink(url, text, file) {
           status: error.response ? error.response.status : '404',
           ok: error.response ? error.response.statusText : 'fail',
         };
-          const showError =  Object.values(result2);
+        if (error.response && error.response.status >= 400 && error.response.status <= 499) {
+          //console.log(error.response.status,'error');
+          //console.log(error.sta, 'el obejto error');
 
-        if ()
-          reject(showError );
+          reject(showError);
+          //return result2
+
+        } else if (error.response && error.response.status >= 500 && error.response.status <= 599) {
+          reject(showError);
+          //return result2
+        } else {
+          reject(showError);
+          // return result2
+        }
+        const showError = Object.values(result2);
+
+
         //return showError
 
       });
