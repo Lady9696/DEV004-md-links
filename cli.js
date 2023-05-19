@@ -1,20 +1,24 @@
-
+#!/usr/bin/env node
 const mdLinks = require("./index.js");
+//import { argv } from 'node:process';
 
 
 
+//routeUser = process.argv;
 
-const ensayo = process.argv[2]
-console.log(ensayo);
-//console.log(process.argv, 'lalalalallllllllllllll');
 
-if(process.argv.includes('--validate')|| process.argv.includes('-v')){
-  mdLinks(result)
+
+//const arguments = process.argv;
+//console.log(argv);
+const isValidate = process.argv;
+if(isValidate.includes('--validate')||isValidate.includes('-v')){
+  console.log({isValidate});
  
 }
 // llmar a mdLinks para que devuelva {´hrf, statu...}
 //console.log(`hello world${args}`);
-/*mdLinks('./test/README.md')
+/*
+mdLinks('./test/README.md')
 .then(( result )=>{
   [{ href, text, file }]
 
