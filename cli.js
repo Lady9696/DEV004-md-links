@@ -10,22 +10,23 @@ const mdLinks = require("./index.js");
 
 //const arguments = process.argv;
 //console.log(argv);
+/*
 const isValidate = process.argv;
 if(isValidate.includes('--validate')||isValidate.includes('-v')){
   console.log({isValidate});
  
 }
+*/
 // llmar a mdLinks para que devuelva {´hrf, statu...}
 //console.log(`hello world${args}`);
-/*
-mdLinks('./test/README.md')
-.then(( result )=>{
-  [{ href, text, file }]
 
-  console.log('resultadoooooooooooooooooooooooooooooooooooooooooooooooooo',href);
+mdLinks('./test/README.md')
+.then(( resultado )=>{
+ // [{ href, text, file }]
+
+  //console.log('resultadoooooooooooooooooooooooooooooooooooooooooooooooooo',href);
 })
 .catch((error) => {
    console.log(error)
 
  });
-*/

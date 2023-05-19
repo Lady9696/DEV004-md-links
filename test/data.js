@@ -109,22 +109,23 @@ function checkLink(url, text, file) {
         };
         if (response.status >= 200 && response.status <= 299) {
           resolve(result);
-          return result
-          //console.log(result);
+          //return result
+          console.log(result);
           
         } else if (response.status >= 100 && response.status <= 199) {
           resolve(result);
-          return result
+          console.log(result);
+          //return result
           //console.log(result);
         } else if (response.status >= 300 && response.status <= 399) {
           resolve(result);
-          //console.log(result);
-          return result
+          console.log(result);
+          //return result
         } else {
 
           resolve(result);
-          //console.log(result);
-          return result
+          console.log(result);
+          //return result
         }
       })
       .catch(error => {
@@ -142,14 +143,14 @@ function checkLink(url, text, file) {
           //console.log(error.sta, 'el obejto error');
 
           reject(result2);
-          return result2
-
+          //return result2
+          
         } else if (error.response && error.response.status >= 500 && error.response.status <= 599) {
           reject(result2);
-          return result2
+          //return result2
         } else {
           reject(result2);
-          return result2
+         // return result2
         }
 
       });
