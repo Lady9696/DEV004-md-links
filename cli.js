@@ -21,7 +21,7 @@ const { argv } = require('node:process');
   
   if(isValidate.includes('--validate') || argv.includes('-v')){
    
-   mdLinks(pathInput, { validate: isValidate })
+   mdLinks(pathInput)
      .then((result) => {
        // Realiza acciones con el resultado
        console.log('Los resultados son:', result);

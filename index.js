@@ -1,8 +1,8 @@
 // fs se debe usar para poder realizar las fucniones debemos 'importar' el mòdulo fs
 //const { identificator } = require('./test/data');
-const axios = require('axios');
+//const axios = require('axios');
 const { existPath, absolute, checkLink, getAllFilesMd, identificatorMd, readMd, getStats, processEnsayo } = require('./test/data');
-const { error, log } = require('console');
+//const { error, log } = require('console');
 //const { mdLinks } = require ('./cli.js')
 
 //const { fs, path } = require('./test/data.js');
@@ -33,10 +33,12 @@ const mdLinks = (routes, options) => {
                 .then((data) => {
                   // esta funciòn me permite extaer los links e iterarlos
                   let result = processEnsayo(data, routeAbsolute);
-                  checkLink(result).then((algo)=>{
-                  console.log(algo, 'algo');
-                  }).catch((error)=>{
-                  console.log(error, 'error');
+                 // console.log(result,'******');
+                  checkLink(result).then((resol) =>{
+                  //console.log(resol, 'algo');
+                  return resol
+                  }).catch((error) => {
+                  return error
                   })
                   // console.log(checkLink(result), '+++++++');
                   //console.log('debe funcionar', result); 
@@ -83,42 +85,13 @@ const mdLinks = (routes, options) => {
                 //console.log(mdfile, 'cada uno de los archivos');
                 readMd(directoryFile)
                   .then((data) => {
-                    let result2 = processEnsayo(data);
-                    //console.log(result2,'result1');
-                    //console.log('es el data', result2);
-                    //console.log( 'extraigo los links', result);
-                    // aquì itero los links quee stan en el obejto result
-                    //promise. all necesita una rreglo de promesas
-                    //.then arreglo de resultados)
-
-                    const promisesArray = result2.links.map((link, index, array) => {
-                      // console.log(link.route, 'link file');
-                      //console.log(link.href, 'link hrfe');
-                      //console.log(link.text, 'link text');
-                      return checkLink(link.href, link.text, link.route)
-
-
+                    let result = processEnsayo(data, routeAbsolute);
+                    checkLink(result).then((resol) =>{
+                    //console.log(resol, 'algo');
+                    return resol
+                    }).catch((error) => {
+                    return error
                     })
-                    //console.log(promisesArray, 'promedas');
-                    Promise.allSettled(promisesArray)
-                      .then((respuestas) => {
-                        // resolve({respuestas}, 'holaaaaaaaaaaa');
-                        console.log({ respuestas }, 'holaaaaaaaaaaa');
-
-                      })
-                      .catch((error) => {
-                        console.error(error);
-                        //reject({error});
-
-                      })
-                    /*
-                                        result2.links.forEach(link => {
-                                          // se invoca la funciòn de la promesa
-                                          
-                                            .catch(error => console.error(error))
-                                            .then((res) => console.log(res));
-                                        });
-                                       */
 
                   })
 

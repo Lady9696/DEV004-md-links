@@ -87,25 +87,50 @@ function processEnsayo(data, route) {
   };
 
 }
-function checkLink(result){
+function checkLink(result, url, text, file) {
   // valida result length === 0
+
+
+
   const promisesArray = result.links.map((link) => {
+    console.log(link.file, 'este es el link');
     //console.log(link, '?????');
-    return fetch(link.href).then((resp)=>{
-      link.status= resp.status,
-      link.ok= resp.statusText
+    return fetch(link.href).then((response) => {
+      link.status = response.status
+      link.ok = response.statusText
+      if (response.status >= 200 && response.status <= 299) {
+        link1.status = link.status;
+        link1.ok = link.ok;
+        console.log(link1, 'porfa');
+        //resolve(show);
+        //console.log(result);
+      } else {
+
+        //resolve(show);
+        return show
+      }
+
+
+
+
+
+      //link.status= resp.status,
+      // link.ok= resp.statusText
       //console.log(link, 'link');
-      return link;
-    }).catch((error)=>{
-      link.status= error.response ? error.response.status : '404',
-      link.ok= error.response ? error.response.statusText : 'fail'
+      //return link;
+    }).catch((error) => {
+      link.status = error.response ? error.response.status : '404',
+        link.ok = error.response ? error.response.statusText : 'fail'
       return link;
     })
 
   })
   //console.log(promisesArray, 'promedas');
   return Promise.all(promisesArray)
+
+
 }
+
 
 // aquì estoy verificando si el link esta disponible o kha
 // function checkLink(url, text, file) {
@@ -163,7 +188,7 @@ function checkLink(result){
 //           //reject(showError);
 //           return showError
 //         }
-        
+
 
 
 //         //return showError
