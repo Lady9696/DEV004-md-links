@@ -2,6 +2,7 @@
 //const { identificator } = require('./test/data');
 const axios = require('axios');
 const { existPath, absolute, checkLink, getAllFilesMd, identificatorMd, readMd, getStats, processEnsayo } = require('./test/data');
+const { error, log } = require('console');
 //const { mdLinks } = require ('./cli.js')
 
 //const { fs, path } = require('./test/data.js');
@@ -32,36 +33,30 @@ const mdLinks = (routes, options) => {
                 .then((data) => {
                   // esta funciòn me permite extaer los links e iterarlos
                   let result = processEnsayo(data, routeAbsolute);
-
+                  checkLink(result).then((algo)=>{
+                  console.log(algo, 'algo');
+                  }).catch((error)=>{
+                  console.log(error, 'error');
+                  })
+                  // console.log(checkLink(result), '+++++++');
                   //console.log('debe funcionar', result); 
                   //console.log( 'extraigo los links', result);
                   // aquì itero los links quee stan en el obejto result
-                  const promisesArray = result.links.map((link, index, array) => {
-                    // console.log(link.route, 'link file');
-                    //console.log(link.href, 'link hrfe');
-                    //console.log(link.text, 'link text');
-                    //console.log(checkLink(link.href, link.text, link.route));
-                    return checkLink(link.href, link.text, link.route)
-                    
-                   
-
-
-                  })
-                  //console.log(promisesArray, 'promedas');
                   
-                  Promise.allSettled(promisesArray)
-                  //console.log(Promise.allSettled(promisesArray))
-                    .then((respuestas) => {
-                      // resolve({respuestas}, 'holaaaaaaaaaaa');
-                      console.log({ respuestas }, 'holaaaaaaaaaaa');
-                      //console.log(respuestas, 'mklsdmznmcvk');
+                  
+                  // Promise.allSettled(promisesArray)
+                  // //console.log(Promise.allSettled(promisesArray))
+                  //   .then((respuestas) => {
+                  //     // resolve({respuestas}, 'holaaaaaaaaaaa');
+                  //     console.log({ respuestas }, 'holaaaaaaaaaaa');
+                  //     //console.log(respuestas, 'mklsdmznmcvk');
 
-                    })
-                    .catch((error) => {
-                      console.error(error);
-                      //reject({error});
+                  //   })
+                  //   .catch((error) => {
+                  //     console.error(error);
+                  //     //reject({error});
 
-                    })
+                  //   })
 
 
                   //console.log(link.href, link.text, link.file);

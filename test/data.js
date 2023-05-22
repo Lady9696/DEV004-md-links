@@ -87,71 +87,90 @@ function processEnsayo(data, route) {
   };
 
 }
+function checkLink(result){
+  // valida result length === 0
+  const promisesArray = result.links.map((link) => {
+    //console.log(link, '?????');
+    return fetch(link.href).then((resp)=>{
+      link.status= resp.status,
+      link.ok= resp.statusText
+      //console.log(link, 'link');
+      return link;
+    }).catch((error)=>{
+      link.status= error.response ? error.response.status : '404',
+      link.ok= error.response ? error.response.statusText : 'fail'
+      return link;
+    })
+
+  })
+  //console.log(promisesArray, 'promedas');
+  return Promise.all(promisesArray)
+}
 
 // aquì estoy verificando si el link esta disponible o kha
-function checkLink(url, text, file) {
-  //let objectTrue = [];
-  return new Promise((resolve, reject) => {
+// function checkLink(url, text, file) {
+//   //let objectTrue = [];
+//   return new Promise((resolve, reject) => {
 
-    // aquì utilizo axios
-    return axios.get(url)
-      //armando el objeto
-      // la promesa
-      .then(response => {
-        //console.log(response.status, 'este es el response');
-        const result = {
-          href: url,
-          file: file,
-          text: text,
-          status: response.status,
-          ok: response.statusText,
+//     // aquì utilizo axios
+//     return axios.get(url)
+//       //armando el objeto
+//       // la promesa
+//       .then(response => {
+//         //console.log(response.status, 'este es el response');
+//         const result = {
+//           href: url,
+//           file: file,
+//           text: text,
+//           status: response.status,
+//           ok: response.statusText,
 
-        };
-        // saco los values 
-        const show = Object.values(result);
+//         };
+//         // saco los values 
+//         const show = Object.values(result);
 
-        if (response.status >= 200 && response.status <= 299) {
-         return show
-          //resolve(show);
-          //console.log(result);
-        } else {
+//         if (response.status >= 200 && response.status <= 299) {
+//          return show
+//           //resolve(show);
+//           //console.log(result);
+//         } else {
 
-          //resolve(show);
-          return show
-        }
-      })
-      .catch(error => {
-        const result2 = {
-          href: url,
-          file: file,
-          text: text,
-          status: error.response ? error.response.status : '404',
-          ok: error.response ? error.response.statusText : 'fail',
-        };
-        const showError = Object.values(result2);
-        if (error.response && error.response.status >= 400 && error.response.status <= 499) {
-          //console.log(error.response.status,'error');
-          //console.log(error.sta, 'el obejto error');
+//           //resolve(show);
+//           return show
+//         }
+//       })
+//       .catch(error => {
+//         const result2 = {
+//           href: url,
+//           file: file,
+//           text: text,
+//           status: error.response ? error.response.status : '404',
+//           ok: error.response ? error.response.statusText : 'fail',
+//         };
+//         const showError = Object.values(result2);
+//         if (error.response && error.response.status >= 400 && error.response.status <= 499) {
+//           //console.log(error.response.status,'error');
+//           //console.log(error.sta, 'el obejto error');
 
-          //reject(showError);
-          return showError
+//           //reject(showError);
+//           return showError
 
-        } else if (error.response && error.response.status >= 500 && error.response.status <= 599) {
-          return showError
-          //reject(showError);
-          //return result2
-        } else {
-          //reject(showError);
-          return showError
-        }
+//         } else if (error.response && error.response.status >= 500 && error.response.status <= 599) {
+//           return showError
+//           //reject(showError);
+//           //return result2
+//         } else {
+//           //reject(showError);
+//           return showError
+//         }
         
 
 
-        //return showError
+//         //return showError
 
-      });
-  })
-}
+//       });
+//   })
+// }
 
 
 //funciòn para leer todos los archivos de los directorios
