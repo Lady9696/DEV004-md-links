@@ -42,28 +42,19 @@ const mdLinks = (routes, options) => {
                     //console.log(link.text, 'link text');
                     //console.log(checkLink(link.href, link.text, link.route));
                     return checkLink(link.href, link.text, link.route)
-                    .then((respuestas) => {
-                      // resolve({respuestas}, 'holaaaaaaaaaaa');
-                      console.log({ respuestas }, 'holaaaaaaaaaaa');
-                      console.log(respuestas, 'mklsdmznmcvk');
-
-                    })
-                    .catch((error) => {
-                      console.error(error);
-                      //reject({error});
-
-                    })
+                    
+                   
 
 
                   })
                   //console.log(promisesArray, 'promedas');
                   
                   Promise.allSettled(promisesArray)
-                  console.log(Promise.allSettled(promisesArray))
+                  //console.log(Promise.allSettled(promisesArray))
                     .then((respuestas) => {
                       // resolve({respuestas}, 'holaaaaaaaaaaa');
                       console.log({ respuestas }, 'holaaaaaaaaaaa');
-                      console.log(respuestas, 'mklsdmznmcvk');
+                      //console.log(respuestas, 'mklsdmznmcvk');
 
                     })
                     .catch((error) => {
