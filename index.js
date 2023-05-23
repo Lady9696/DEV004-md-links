@@ -38,11 +38,11 @@ const mdLinks = (routes, options) => {
                   checkLink(result)
                     .then((resol) => {
                       // console.log(resol, 'algo');
-                      // resolve(resol);
+                      resolve(resol);
                     })
                     .catch((error) => {
-                      // reject(error);
-                      console.log(error, 'lalalla');
+                      reject(error);
+                      
                     });
                     //console.log(checkLink(result), '+++++++');
                   //console.log('debe funcionar', result); 

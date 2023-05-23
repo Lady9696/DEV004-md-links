@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 //const fetch = require('node-fetch');
-//const axios = require('axios');
+const axios = require('axios');
 
 
 // Fucniòn para identificar si existe la ruta
@@ -89,12 +89,63 @@ function processEnsayo(data, route) {
 
 }
 function checkLink(result, url, text, file) {
-  // valida result length === 0
   if (result.length === 0) {
     console.log('esta vacio');
   } else {
     const promisesArray = result.links.map((link) => {
       const objectTrue = {
+        href: url,
+        file: file,
+        text: text,
+      };
+
+      return axios.get(link.href)
+        .then((response) => {
+          link.status = response.status;
+          link.ok = response.statusText;
+          objectTrue.status = link.status;
+          objectTrue.ok = link.ok;
+          objectTrue.href = link.href;
+          objectTrue.file = link.file;
+          objectTrue.text = link.text;
+          if (response.status >= 200 && response.status <= 299) {
+            return objectTrue;
+          } else {
+            return objectTrue;
+          }
+        })
+        .catch((error) => {
+          const objectTrue2 = {
+            href: url,
+            file: file,
+            text: text,
+          };
+          link.status = error.response ? error.response.status : '404';
+          link.ok = error.response ? error.response.statusText : 'fail';
+          objectTrue2.status = link.status;
+          objectTrue2.ok = link.ok;
+          objectTrue2.href = link.href;
+          objectTrue2.file = link.file;
+          objectTrue2.text = link.text;
+          if (error.response && error.response.status >= 400 && error.response.status <= 499) {
+            return objectTrue2;
+          } else {
+            return objectTrue2;
+          }
+        });
+    });
+
+    return Promise.all(promisesArray);
+  }
+}
+
+/*function checkLink(result, url, text, file) {
+  // valida result length === 0
+  if (result.length === 0) {
+    console.log('esta vacio');
+  } else {
+    const promisesArray = result.links.map((link) => {
+      /*const objectTrue = {
         href: url,
         file: file,
         text: text,
@@ -112,13 +163,16 @@ function checkLink(result, url, text, file) {
         objectTrue.href = link.href;
         objectTrue.file = link.file;
         objectTrue.text = link.text;
+        
         if (response.status >= 200 && response.status <= 299) {
           //console.log(objectTrue, 'porfa');
           //resolve(show);
           //console.log(result);
-          return objectTrue
+          //return objectTrue
+          return link
         } else {
-          return objectTrue
+          //return objectTrue
+          return link
         }
         //link.status= resp.status,
         // link.ok= resp.statusText
@@ -132,6 +186,7 @@ function checkLink(result, url, text, file) {
           text: text,
 
         };
+        
         link.status = error.response ? error.response.status : '404';
         link.ok = error.response ? error.response.statusText : 'fail';
         objectTrue2.status = link.status;
@@ -139,10 +194,12 @@ function checkLink(result, url, text, file) {
         objectTrue2.href = link.href;
         objectTrue2.file = link.file;
         objectTrue2.text = link.text;
+        
         if (error.response && error.response.status >= 400 && error.response.status <= 499) {
-         return objectTrue2
+         //return objectTrue2
+         return link
         } else{
-          return objectTrue2
+          return link
         }
          
        
@@ -157,7 +214,7 @@ function checkLink(result, url, text, file) {
 
 }
 
-
+*/
 // aquì estoy verificando si el link esta disponible o kha
 // function checkLink(url, text, file) {
 //   //let objectTrue = [];
