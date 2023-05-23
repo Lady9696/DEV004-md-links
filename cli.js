@@ -12,45 +12,51 @@ const { argv } = require('node:process');
 //const arguments = process.argv;
 //console.log( arguments );
 //ShowObject = {
-  const pathInput = process.argv[2];
+  //const pathInput = process.argv[2];
 
   // Verifica si se proporcionó la opción de validación (--validate o -v)
   const isValidate = argv[2];
   //const isValidate = argv.includes('--validate') || argv.includes('-v');
-  
-  
+   /*
+  // Llama a la función mdLinks y maneja los resultados y errores
   if(isValidate.includes('--validate') || argv.includes('-v')){
    
-   mdLinks(pathInput)
-     .then((result) => {
-       // Realiza acciones con el resultado
-       console.log('Los resultados son:', result);
-       // Llama a otra función y pasa el resultado como argumento
-       
-     })
-     .catch((error) => {
-       // Maneja los errores
-       console.error('Ocurrió un error:', error);
-     });
-   } else {
-     console.log('comando ivalido');
-   }
- /*
+    mdLinks(pathInput)
+      .then((result) => {
+        // Realiza acciones con el resultado
+       //console.log('Los resultados son:', result, '******************************');
+        // Llama a otra función y pasa el resultado como argumento
+        
+      })
+      .catch((error) => {
+        // Maneja los errores
+        console.error('Ocurrió un error:', error, '++++++++++++++++');
+      });
+    
+
+    } else {
+      console.log('comando ivalido');
+    }
+   
+  */
+  
+  
+  
  
-  
-  
-  // Llama a la función mdLinks y maneja los resultados y errores
-  mdLinks('./test/README.md')
+
+    mdLinks('./test/README.md')
     .then((result) => {
       // Maneja los resultados
-      console.log(result);
+      console.log (result)
     })
     .catch((error) => {
       // Maneja los errores
       console.error(error);
     });
    
+ 
+ 
   
-  */
+ 
   
   

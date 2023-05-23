@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
-const axios = require('axios');
+//const fetch = require('node-fetch');
+//const axios = require('axios');
 
 
 // Fucniòn para identificar si existe la ruta
@@ -89,45 +90,70 @@ function processEnsayo(data, route) {
 }
 function checkLink(result, url, text, file) {
   // valida result length === 0
+  if (result.length === 0) {
+    console.log('esta vacio');
+  } else {
+    const promisesArray = result.links.map((link) => {
+      const objectTrue = {
+        href: url,
+        file: file,
+        text: text,
 
+      };
 
+      //console.log(link.href, 'si soyyy');
+      //console.log(link1, '?????');
+      return fetch(link.href).then((response) => {
+       
+        link.status = response.status
+        link.ok = response.statusText
+        objectTrue.status = link.status;
+        objectTrue.ok = link.ok;
+        objectTrue.href = link.href;
+        objectTrue.file = link.file;
+        objectTrue.text = link.text;
+        if (response.status >= 200 && response.status <= 299) {
+          //console.log(objectTrue, 'porfa');
+          //resolve(show);
+          //console.log(result);
+          return objectTrue
+        } else {
+          return objectTrue
+        }
+        //link.status= resp.status,
+        // link.ok= resp.statusText
+        //console.log(link, 'link');
+        //return link;
 
-  const promisesArray = result.links.map((link) => {
-    console.log(link.file, 'este es el link');
-    //console.log(link, '?????');
-    return fetch(link.href).then((response) => {
-      link.status = response.status
-      link.ok = response.statusText
-      if (response.status >= 200 && response.status <= 299) {
-        link1.status = link.status;
-        link1.ok = link.ok;
-        console.log(link1, 'porfa');
-        //resolve(show);
-        //console.log(result);
-      } else {
+      }).catch((error) => {
+        const objectTrue2 = {
+          href: url,
+          file: file,
+          text: text,
 
-        //resolve(show);
-        return show
-      }
+        };
+        link.status = error.response ? error.response.status : '404';
+        link.ok = error.response ? error.response.statusText : 'fail';
+        objectTrue2.status = link.status;
+        objectTrue2.ok = link.ok;
+        objectTrue2.href = link.href;
+        objectTrue2.file = link.file;
+        objectTrue2.text = link.text;
+        if (error.response && error.response.status >= 400 && error.response.status <= 499) {
+         return objectTrue2
+        } else{
+          return objectTrue2
+        }
+         
+       
+      })
 
-
-
-
-
-      //link.status= resp.status,
-      // link.ok= resp.statusText
-      //console.log(link, 'link');
-      //return link;
-    }).catch((error) => {
-      link.status = error.response ? error.response.status : '404',
-        link.ok = error.response ? error.response.statusText : 'fail'
-      return link;
     })
+    //console.log(promisesArray, 'promedas');
+    return Promise.all(promisesArray)
 
-  })
-  //console.log(promisesArray, 'promedas');
-  return Promise.all(promisesArray)
 
+  }
 
 }
 

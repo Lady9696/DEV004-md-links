@@ -33,19 +33,23 @@ const mdLinks = (routes, options) => {
                 .then((data) => {
                   // esta funciòn me permite extaer los links e iterarlos
                   let result = processEnsayo(data, routeAbsolute);
-                 // console.log(result,'******');
-                  checkLink(result).then((resol) =>{
-                  //console.log(resol, 'algo');
-                  return resol
-                  }).catch((error) => {
-                  return error
-                  })
-                  // console.log(checkLink(result), '+++++++');
+
+                  // console.log(result,'******');
+                  checkLink(result)
+                    .then((resol) => {
+                      // console.log(resol, 'algo');
+                      // resolve(resol);
+                    })
+                    .catch((error) => {
+                      // reject(error);
+                      console.log(error, 'lalalla');
+                    });
+                    //console.log(checkLink(result), '+++++++');
                   //console.log('debe funcionar', result); 
                   //console.log( 'extraigo los links', result);
                   // aquì itero los links quee stan en el obejto result
-                  
-                  
+
+
                   // Promise.allSettled(promisesArray)
                   // //console.log(Promise.allSettled(promisesArray))
                   //   .then((respuestas) => {
@@ -86,11 +90,11 @@ const mdLinks = (routes, options) => {
                 readMd(directoryFile)
                   .then((data) => {
                     let result = processEnsayo(data, routeAbsolute);
-                    checkLink(result).then((resol) =>{
-                    //console.log(resol, 'algo');
-                    return resol
+                    checkLink(result).then((resol) => {
+                      //console.log(resol, 'algo');
+                      return resol
                     }).catch((error) => {
-                    return error
+                      return error
                     })
 
                   })
@@ -108,7 +112,7 @@ const mdLinks = (routes, options) => {
       //tabnine
 
     } else {
-      reject('la ruta no existe');
+      console.log('la ruta no existe');
     }
   })
 
