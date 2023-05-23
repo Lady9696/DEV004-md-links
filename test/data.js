@@ -8,6 +8,7 @@ const axios = require('axios');
 const existPath = (file) => {
   return fs.existsSync(file);
 
+
 };
 // Funciòn que identifica si la ruta es relativa o absoluta, y en caso de ser relativa, la vuelve absoluta.
 const absolute = (file) => {
@@ -303,7 +304,7 @@ const getAllFilesMd = (dirPath, arrayOfFiles) => {
 
 
 module.exports = {
-  //identificator, 
+  
   existPath, absolute, checkLink, getAllFilesMd, identificatorMd, readMd, getStats, processEnsayo//readDirectory, identificatorMd,
 };
 module.exports.fs = require("fs");
