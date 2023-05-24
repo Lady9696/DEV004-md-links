@@ -23,7 +23,7 @@ const identificatorMd = (file) => {
     //console.log(file, 'es md');
     return true
 
-  }  else {
+  } else {
     return false
   }
 }
@@ -49,13 +49,13 @@ const readMd = (file) => {
     fs.readFile(file, 'utf8', (err, data) => {
       if (err) {
         reject(err)
-      } else if (data.length === 0){
+      } else if (data.length === 0) {
         reject('el arhcivo esta vacìo');
       }
-        resolve(data)
+      resolve(data)
     });
   })
-//
+  //
 }
 //esto me permite extraer los links
 function processEnsayo(data, route) {
@@ -297,22 +297,63 @@ const getAllFilesMd = (dirPath, arrayOfFiles) => {
     } else {
       const filePath = path.join(dirPath, file);
       arrayOfFiles.push(filePath);
-     
+
     }
     //console.log(files, 'oooooooooooooooooooooooooooo')
 
   })
   return arrayOfFiles
   //console.log(arrayOfFiles, 'llalalalaal');
+
+}
+let indice = 0;
+const itera = (directoryFile, routeAbsolute) => {
+  //funciòn que me itere
+    
+    if (identificatorMd(directoryFile[indice])) {
+      
+         // El archivo es un archivo Markdown (.md)
+      // Realiza las acciones que necesites con el archivo
+      console.log(directoryFile[indice], 'el archivos md');
+      //ahora los leo invocando la funciòn nuevamente
+      readMd(directoryFile[indice])
+        .then((data) => {
+          console.log('aqui muestro la lectura de los archivos', data)
+          let result2 = processEnsayo(data, routeAbsolute);
+           console.log(result2, '----------------------')
+           if(indice <= directoryFile.length){
+            console.log( directoryFile.length, '++++++++++++++++');
+            indice++//va aumentar en 1
+            console.log(indice, '**********');
+           itera(directoryFile, routeAbsolute)//tiene el valor 1
+           
+          }
+                   
+        })// este es el catch de readfile
+        .catch((error) => {
+          console.log(error, 'este es el error');
+        })
+
+
+
+
+
+
+
+
+
+    }
+
   
 }
 
+//readMd
 
 
 
 module.exports = {
-  
-  existPath, absolute, checkLink, getAllFilesMd, identificatorMd, readMd, getStats, processEnsayo//readDirectory, identificatorMd,
+
+  existPath, absolute, checkLink, getAllFilesMd, identificatorMd, readMd, getStats, processEnsayo, itera//readDirectory, identificatorMd,
 };
 module.exports.fs = require("fs");
 module.exports.path = require("path");

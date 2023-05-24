@@ -1,7 +1,7 @@
 // fs se debe usar para poder realizar las fucniones debemos 'importar' el mòdulo fs
 //const { identificator } = require('./test/data');
 //const axios = require('axios');
-const { existPath, absolute, checkLink, getAllFilesMd, identificatorMd, readMd, getStats, processEnsayo } = require('./test/data');
+const { existPath, absolute, checkLink, getAllFilesMd, identificatorMd, readMd, getStats, processEnsayo,itera} = require('./test/data');
 //const { error, log } = require('console');
 //const { mdLinks } = require ('./cli.js')
 
@@ -59,49 +59,9 @@ const mdLinks = (routes, options) => {
             const directoryFiles = getAllFilesMd(routeAbsolute);
             console.log(directoryFiles, 'esto');
             // itero los archivos 
-            directoryFiles.forEach((directoryFile) => {
-              if (identificatorMd(directoryFile)) {
-                
-                // El archivo es un archivo Markdown (.md)
-                // Realiza las acciones que necesites con el archivo
-                console.log(directoryFile, 'el archivos md');
-                //ahora los leo invocando la funciòn nuevamente
-                readMd(directoryFile)
-                  .then((data) => {
-                    console.log('aqui muestro la lectura de los archivos', data)
-                    let result2 = processEnsayo(data, routeAbsolute);
-                    if (option == {validate: false}){
-                      resolve(result2)
-                    } else if(option == {validate: true}) {
-                      checkLink(result2)
-                      .then((resolD) => {
-                        //console.log(resolD, 'algo');
-                        resolve(resolD)
-
-                      }).catch((error) => {
-                        reject(error) 
-                      })
-
-                    }
-                    //console.log(result, 'extrayendo los links');
-                    
-
-                  })// este es el catch de readfile
-                  .catch((error) => {
-                    console.log(error, 'este es el error');
-                  })
-
-                
-                               
-                                
-                
-
-
-
-
-              }
-
-            })
+            let indice = 0;
+           itera(directoryFiles, routeAbsolute);
+           //console.log()
 
 
           }
