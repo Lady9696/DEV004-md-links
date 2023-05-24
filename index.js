@@ -62,6 +62,7 @@ const mdLinks = (routes, options) => {
             let indice = 0;
            const mdFiles = itera(directoryFiles, routeAbsolute);
            console.log(mdFiles, 'asdfgh');
+           
 
 
           }

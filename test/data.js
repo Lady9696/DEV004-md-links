@@ -286,9 +286,10 @@ function checkLink(result, url, text, file) {
 
 
 //funciòn para leer todos los archivos de los directorios
-const getAllFilesMd = (dirPath, arrayOfFiles) => {
+const getAllFilesMd = (dirPath, file, arrayOfFiles) => {
   files = fs.readdirSync(dirPath)
   arrayOfFiles = arrayOfFiles || []
+  file = file|| []
 
   files.forEach(function (file) {
     if (fs.statSync(dirPath + "/" + file).isDirectory()) {
@@ -299,18 +300,26 @@ const getAllFilesMd = (dirPath, arrayOfFiles) => {
       arrayOfFiles.push(filePath);
 
     }
-    //console.log(files, 'oooooooooooooooooooooooooooo')
+    //console.log(file, 'oooooooooooooooooooooooooooo')
+    if (identificatorMd(file)){
+      //console.log(file, '*******');
+      return file
+    }
+    //console.log(identificatorMd(file), '**************')
 
   })
-  return arrayOfFiles
+  return file
+  //console.log(file, '*******');
+  //return arrayOfFiles
   //console.log(arrayOfFiles, 'llalalalaal');
 
 }
+
 let indice = 0;
 const itera = (directoryFile, routeAbsolute) => {
   //funciòn que me itere
     
-    if (identificatorMd(directoryFile[indice])) {
+    if (directoryFile[indice]) {
       
          // El archivo es un archivo Markdown (.md)
       // Realiza las acciones que necesites con el archivo
