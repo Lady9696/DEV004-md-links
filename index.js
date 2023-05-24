@@ -92,23 +92,26 @@ const mdLinks = (routes, options) => {
                 readMd(directoryFile)
                   .then((data) => {
                     console.log('aqui muestro la lectura de los archivos', data)
+                    let result = processEnsayo(data, routeAbsolute);
+                    console.log(result, 'extrayendo los links');
+                    checkLink(result)
+                      .then((resol) => {
+                        console.log(resol, 'algo');
+                        return resol
 
+                      }).catch((error) => {
+                        return error
+                      })
 
-                  })
+                  })// este es el catch de readfile
                   .catch((error) => {
                     console.log(error, 'este es el error');
                   })
 
-                /*
-                                let result = processEnsayo(data, routeAbsolute);
-                                checkLink(result).then((resol) => {
-                                  //console.log(resol, 'algo');
-                                  return resol
                 
-                                }).catch((error) => {
-                                  return error
-                                })
-                */
+                               
+                                
+                
 
 
 

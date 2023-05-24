@@ -7,7 +7,6 @@ const { argv } = require('node:process');
 //const mdLinks = require("./prueba");
 //import { argv } from 'node:process';
 
-/*
 // Aquì capturo la ruta del usuario
 pathInput = process.argv[2];
 
@@ -78,11 +77,11 @@ pathInput = process.argv[2];
     }
    
   
-  */
+  
   
   
  
-
+/*
     mdLinks('./prueba')
     .then((result) => {
       // Maneja los resultados
@@ -93,7 +92,7 @@ pathInput = process.argv[2];
       console.error(error);
     });
    
- 
+ */
  
   
  
