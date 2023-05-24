@@ -76,7 +76,7 @@ const mdLinks = (routes, options) => {
             } else {
               console.log('no es md');
             }
-          } else {
+          } /*else {
             // aqui esta todos los archivos  en un array
             const directoryFiles = getAllFilesMd(routeAbsolute);
             // console.log(directoryFiles, 'esto');
@@ -106,7 +106,7 @@ const mdLinks = (routes, options) => {
             })
 
 
-          }
+          }*/
 
         })
       //tabnine

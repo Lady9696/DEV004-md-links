@@ -1,11 +1,14 @@
-//const mdLinks = require('./data.js');
+const { mdLinks } = require('../index.js');
 const path = require("path");
 const { existPath } = require("./data.js");
 const { absolute } = require("./data.js");
 const { identificatorMd } = require("./data.js");
 const { readMd } = require("./data.js");
+const { getStats } = require("./data.js");
 
-/*
+
+
+
 
 describe('absolute', () => {
 
@@ -46,7 +49,9 @@ describe('identificatorMd', () => {
   });
 
 });
-*/
+
+
+
 describe('readMd', () => {
 
   it('Muestra el contenido del archivo como string', () => {
@@ -61,12 +66,36 @@ describe('readMd', () => {
 
 
 
+});
+
+
+
+  describe('getStats', () => {
+
+    it('Muestra el contenido del archivo como string', () => {
+      return getStats("prueba/prueba1.md")
+        .then((data) => {
+          expect(data).toBe('node archivo node.com');
+        })
+        .catch((error) => {
+          throw new Error('El test ha fallado:', error);
+      });
+    });
+
 
 
 });
 
 
+describe('mdLinks', () => {
+  it('deberìa retornar una promesa', () => {
+    expect (mdLinks()).toBeInstanceOf(Promise);
+  });
+
+});
+
 /*
+
 describe('mdLinks', () => {
 
   it('deberìa devolver una promesa', () => {
