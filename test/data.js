@@ -48,11 +48,13 @@ const readMd = (file) => {
     fs.readFile(file, 'utf8', (err, data) => {
       if (err) {
         reject(err)
-      } else
+      } else if (data.length === 0){
+        reject('el arhcivo esta vacìo');
+      }
         resolve(data)
     });
   })
-
+//
 }
 //esto me permite extraer los links
 function processEnsayo(data, route) {

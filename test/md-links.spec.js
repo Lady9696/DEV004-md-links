@@ -52,15 +52,24 @@ describe('readMd', () => {
   it('Muestra el contenido del archivo como string', () => {
     return readMd("prueba/prueba1.md")
       .then((data) => {
-        expect(data.trim()).toBe('node archivo node.com');
+        expect(data).toBe('node archivo node.com');
       })
       .catch((error) => {
         throw new Error('El test ha fallado:', error);
-      });
-
+    });
   });
 
+ it('debería lanzar un error al intentar leer un archivo inexistente', () => {
+    //const archivo = 'ruta/al/archivo_inexistente.md'; // Reemplaza por una ruta inválida
 
+    return readMd("prueba/prueba2.md")
+      .then(() => {
+        throw new Error('El test debería haber lanzado un error');
+      })
+      .catch((error) => {
+        expect(error).toBeDefined();
+      });
+  });
 
 
 
