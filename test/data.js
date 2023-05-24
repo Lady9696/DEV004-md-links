@@ -21,10 +21,9 @@ const absolute = (file) => {
 const identificatorMd = (file) => {
   if (path.extname(file) === '.md') {
     //console.log(file, 'es md');
-    return file
+    return true
 
-  } else {
-    //console.log('no es md')
+  }  else {
     return false
   }
 }
@@ -42,6 +41,8 @@ const getStats = (route) => {
     });
   })
 }
+//recorra
+
 // leer archivos md 
 const readMd = (file) => {
   return new Promise((resolve, reject) => {
@@ -292,14 +293,18 @@ const getAllFilesMd = (dirPath, arrayOfFiles) => {
   files.forEach(function (file) {
     if (fs.statSync(dirPath + "/" + file).isDirectory()) {
       arrayOfFiles = getAllFilesMd(dirPath + "/" + file, arrayOfFiles)
+      
     } else {
       const filePath = path.join(dirPath, file);
       arrayOfFiles.push(filePath);
-
+     
     }
+    console.log(files, 'oooooooooooooooooooooooooooo')
 
   })
-  return arrayOfFiles
+  //return arrayOfFiles
+  console.log(arrayOfFiles, 'llalalalaal');
+  
 }
 
 

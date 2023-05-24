@@ -6,7 +6,8 @@ const { argv } = require('node:process');
 //const mdLinks = require("./test/README.md");
 //const mdLinks = require("./prueba");
 //import { argv } from 'node:process';
-
+//md-links ./prueba -v
+/*
 // Aquì capturo la ruta del usuario
 pathInput = process.argv[2];
 
@@ -25,6 +26,7 @@ pathInput = process.argv[2];
    
     mdLinks(pathInput)
       .then((result) => {
+        const show = result.values(result)
         // Realiza acciones con el resultado
        console.log('Los resultados son:', result, '******************************');
         // Llama a otra función y pasa el resultado como argumento
@@ -76,12 +78,12 @@ pathInput = process.argv[2];
       console.log('comando ivalido');
     }
    
-  
+  */
   
   
   
  
-/*
+
     mdLinks('./prueba')
     .then((result) => {
       // Maneja los resultados
@@ -92,7 +94,7 @@ pathInput = process.argv[2];
       console.error(error);
     });
    
- */
+ 
  
   
  

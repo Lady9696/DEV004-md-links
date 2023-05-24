@@ -40,32 +40,8 @@ const mdLinks = (routes, options) => {
                       // console.log(resol, 'algo');
                       resolve(resol);
                     })
-                    .catch((error) => {
-                      reject(error);
-
-                    });
-                  //console.log(checkLink(result), '+++++++');
-                  //console.log('debe funcionar', result); 
-                  //console.log( 'extraigo los links', result);
-                  // aquì itero los links quee stan en el obejto result
-
-
-                  // Promise.allSettled(promisesArray)
-                  // //console.log(Promise.allSettled(promisesArray))
-                  //   .then((respuestas) => {
-                  //     // resolve({respuestas}, 'holaaaaaaaaaaa');
-                  //     console.log({ respuestas }, 'holaaaaaaaaaaa');
-                  //     //console.log(respuestas, 'mklsdmznmcvk');
-
-                  //   })
-                  //   .catch((error) => {
-                  //     console.error(error);
-                  //     //reject({error});
-
-                  //   })
-
-
-                  //console.log(link.href, link.text, link.file);
+                    
+                  
 
 
                 }).catch((error) => {
@@ -85,23 +61,30 @@ const mdLinks = (routes, options) => {
             // itero los archivos 
             directoryFiles.forEach((directoryFile) => {
               if (identificatorMd(directoryFile)) {
+                
                 // El archivo es un archivo Markdown (.md)
                 // Realiza las acciones que necesites con el archivo
-                console.log(directoryFile, 'todos los archivos md');
+                console.log(directoryFile, 'el archivos md');
                 //ahora los leo invocando la funciòn nuevamente
                 readMd(directoryFile)
                   .then((data) => {
                     console.log('aqui muestro la lectura de los archivos', data)
-                    let result = processEnsayo(data, routeAbsolute);
-                    console.log(result, 'extrayendo los links');
-                    checkLink(result)
-                      .then((resol) => {
-                        console.log(resol, 'algo');
-                        return resol
+                    let result2 = processEnsayo(data, routeAbsolute);
+                    if (option == {validate: false}){
+                      resolve(result2)
+                    } else if(option == {validate: true}) {
+                      checkLink(result2)
+                      .then((resolD) => {
+                        //console.log(resolD, 'algo');
+                        resolve(resolD)
 
                       }).catch((error) => {
-                        return error
+                        reject(error) 
                       })
+
+                    }
+                    //console.log(result, 'extrayendo los links');
+                    
 
                   })// este es el catch de readfile
                   .catch((error) => {
@@ -162,4 +145,27 @@ mdLinks('./test/README.md')
    console.log(error)
 
  });
-*/
+*///console.log(checkLink(result), '+++++++');
+                  //console.log('debe funcionar', result); 
+                  //console.log( 'extraigo los links', result);
+                  // aquì itero los links quee stan en el obejto result
+
+
+                  // Promise.allSettled(promisesArray)
+                  // //console.log(Promise.allSettled(promisesArray))
+                  //   .then((respuestas) => {
+                  //     // resolve({respuestas}, 'holaaaaaaaaaaa');
+                  //     console.log({ respuestas }, 'holaaaaaaaaaaa');
+                  //     //console.log(respuestas, 'mklsdmznmcvk');
+
+                  //   })
+                  //   .catch((error) => {
+                  //     console.error(error);
+                  //     //reject({error});
+
+                  //   })
+
+
+                  //console.log(link.href, link.text, link.file);
+
+                 
