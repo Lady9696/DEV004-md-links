@@ -5,9 +5,9 @@ const { absolute } = require("./data.js");
 const { identificatorMd } = require("./data.js");
 const { readMd } = require("./data.js");
 const { getStats } = require("./data.js");
+const { processEnsayo } = require('./data.js');
 
 
-/*
 
 
 describe('absolute', () => {
@@ -55,7 +55,7 @@ describe('identificatorMd', () => {
 describe('readMd', () => {
 
   it('Muestra el contenido del archivo como string', () => {
-    return readMd("prueba/prueba1.md")
+    return readMd("prueba/prueba2.md")
       .then((data) => {
         expect(data).toBe('node archivo node.com');
       })
@@ -69,7 +69,7 @@ describe('readMd', () => {
 });
 
 
-
+/*
 describe('getStats', () => {
   it('la promesa se resuleve con el stats', () => {
     //const route = 'path/to/your/file.txt';
@@ -120,6 +120,37 @@ describe('mdLinks', () => {
   });
 
 
+});
+
+
+
+describe('processEnsayo', () => {
+  it('Devuelve un objeto con los enlaces encontrados', () => {
+    const data = `
+    [aquí](http://rmarkdown.rstudio.com/)
+    [video](https://www.youtube.com/watch?v=vQ_EBqgUR0c&ab_channel=Luucamay/)`;
+
+    const route = 'prueba/prueba1.md';
+
+    const result = processEnsayo(data, route);
+
+    expect(result).toEqual({
+      links: [
+        { href: 'http://rmarkdown.rstudio.com/', text: 'aquí', file: 'prueba/prueba1.md' },
+        { href: 'https://www.youtube.com/watch?v=vQ_EBqgUR0c&ab_channel=Luucamay/', text: 'video', file:  'prueba/prueba1.md' }
+      ]
+    });
+  });
+  test('debería devolver un objeto vacío si no se encuentran enlaces', () => {
+    const data = 'este arhcivo no tiene enlaces';
+    const route = 'prueba/prueba3.md';
+
+    const result = processEnsayo(data, route);
+
+    expect(result).toEqual({
+      links: []
+    });
+  });
 });
 
 /*
