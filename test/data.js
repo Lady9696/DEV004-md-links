@@ -293,17 +293,17 @@ const getAllFilesMd = (dirPath, arrayOfFiles) => {
   files.forEach(function (file) {
     if (fs.statSync(dirPath + "/" + file).isDirectory()) {
       arrayOfFiles = getAllFilesMd(dirPath + "/" + file, arrayOfFiles)
-      
+
     } else {
       const filePath = path.join(dirPath, file);
       arrayOfFiles.push(filePath);
      
     }
-    console.log(files, 'oooooooooooooooooooooooooooo')
+    //console.log(files, 'oooooooooooooooooooooooooooo')
 
   })
-  //return arrayOfFiles
-  console.log(arrayOfFiles, 'llalalalaal');
+  return arrayOfFiles
+  //console.log(arrayOfFiles, 'llalalalaal');
   
 }
 
