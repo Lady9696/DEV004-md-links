@@ -60,8 +60,8 @@ const mdLinks = (routes, options) => {
             console.log(directoryFiles, 'esto');
             // itero los archivos 
             let indice = 0;
-           itera(directoryFiles, routeAbsolute);
-           //console.log()
+           const mdFiles = itera(directoryFiles, routeAbsolute);
+           console.log(mdFiles, 'asdfgh');
 
 
           }

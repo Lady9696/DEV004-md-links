@@ -319,14 +319,15 @@ const itera = (directoryFile, routeAbsolute) => {
       readMd(directoryFile[indice])
         .then((data) => {
           console.log('aqui muestro la lectura de los archivos', data)
-          let result2 = processEnsayo(data, routeAbsolute);
-           console.log(result2, '----------------------')
-           if(indice <= directoryFile.length){
-            console.log( directoryFile.length, '++++++++++++++++');
+          //let result2 = processEnsayo(data, routeAbsolute);
+          
+           //console.log(result2, '----------------------')
+           if(indice <= directoryFile.length) {
+            //console.log( directoryFile.length, '++++++++++++++++');
             indice++//va aumentar en 1
-            console.log(indice, '**********');
-           itera(directoryFile, routeAbsolute)//tiene el valor 1
-           
+            //console.log(indice, '**********');
+            return itera(directoryFile, routeAbsolute)//tiene el valor 1
+            
           }
                    
         })// este es el catch de readfile
