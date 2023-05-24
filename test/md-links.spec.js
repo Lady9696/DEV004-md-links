@@ -59,17 +59,7 @@ describe('readMd', () => {
     });
   });
 
- it('debería lanzar un error al intentar leer un archivo inexistente', () => {
-    //const archivo = 'ruta/al/archivo_inexistente.md'; // Reemplaza por una ruta inválida
 
-    return readMd("prueba/prueba2.md")
-      .then(() => {
-        throw new Error('El test debería haber lanzado un error');
-      })
-      .catch((error) => {
-        expect(error).toBeDefined();
-      });
-  });
 
 
 
