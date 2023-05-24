@@ -152,6 +152,50 @@ describe('processEnsayo', () => {
     });
   });
 });
+describe('checkLink', () => {
+  test('debería devolver un array de promesas con los resultados de las peticiones', async () => {
+    const result = {
+      links: [
+        { href: 'https://www.enlace1.com', text: 'enlace1', file: '/path/to/file.md' },
+        { href: 'https://www.enlace2.com', text: 'enlace2', file: '/path/to/file.md' }
+      ]
+    };
+
+    const url = 'https://www.example.com';
+    const text = 'ejemplo';
+    const file = '/path/to/file.md';
+
+    // Mock de axios para simular la respuesta exitosa
+    jest.spyOn(axios, 'get').mockResolvedValue({ status: 200, statusText: 'OK' });
+
+    const promisesArray = checkLink(result, url, text, file);
+    const response = await Promise.all(promisesArray);
+
+    expect(response).toEqual([
+      {
+        href: 'https://www.example.com',
+        file: '/path/to/file.md',
+        text: 'ejemplo',
+        status: 200,
+        ok: 'OK'
+      },
+      {
+        href: 'https://www.example.com',
+        file: '/path/to/file.md',
+        text: 'ejemplo',
+        status: 200,
+        ok: 'OK'
+      }
+    ]);
+  });
+
+  
+});
+
+
+
+
+
 
 /*
 

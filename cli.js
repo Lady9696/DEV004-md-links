@@ -1,12 +1,13 @@
 #!/usr/bin/env node
-const { link } = require("node:fs");
+
 const { mdLinks } = require("./index.js");
 const { argv } = require('node:process');
-const { fail } = require("node:assert");
+
 //const mdLinks = require("./test/README.md");
+//const mdLinks = require("./prueba");
 //import { argv } from 'node:process';
 
-
+/*
 // Aquì capturo la ruta del usuario
 pathInput = process.argv[2];
 
@@ -77,12 +78,12 @@ pathInput = process.argv[2];
     }
    
   
-  
+  */
   
   
  
-/*
-    mdLinks('./test/README.md')
+
+    mdLinks('./prueba')
     .then((result) => {
       // Maneja los resultados
       console.log (result)
@@ -91,7 +92,7 @@ pathInput = process.argv[2];
       // Maneja los errores
       console.error(error);
     });
-   */
+   
  
  
   

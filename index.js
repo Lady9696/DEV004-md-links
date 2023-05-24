@@ -42,9 +42,9 @@ const mdLinks = (routes, options) => {
                     })
                     .catch((error) => {
                       reject(error);
-                      
+
                     });
-                    //console.log(checkLink(result), '+++++++');
+                  //console.log(checkLink(result), '+++++++');
                   //console.log('debe funcionar', result); 
                   //console.log( 'extraigo los links', result);
                   // aquì itero los links quee stan en el obejto result
@@ -68,7 +68,9 @@ const mdLinks = (routes, options) => {
                   //console.log(link.href, link.text, link.file);
 
 
-                });
+                }).catch((error) => {
+                  console.log(error, 'este es el error');
+                })
 
 
 
@@ -79,25 +81,35 @@ const mdLinks = (routes, options) => {
           } else {
             // aqui esta todos los archivos  en un array
             const directoryFiles = getAllFilesMd(routeAbsolute);
-            // console.log(directoryFiles, 'esto');
+            console.log(directoryFiles, 'esto');
             // itero los archivos 
             directoryFiles.forEach((directoryFile) => {
               if (identificatorMd(directoryFile)) {
                 // El archivo es un archivo Markdown (.md)
                 // Realiza las acciones que necesites con el archivo
-                console.log(directoryFile, 'es markdow');
-                //console.log(mdfile, 'cada uno de los archivos');
+                console.log(directoryFile, 'todos los archivos md');
+                //ahora los leo invocando la funciòn nuevamente
                 readMd(directoryFile)
                   .then((data) => {
-                    let result = processEnsayo(data, routeAbsolute);
-                    checkLink(result).then((resol) => {
-                      //console.log(resol, 'algo');
-                      return resol
-                    }).catch((error) => {
-                      return error
-                    })
+                    console.log('aqui muestro la lectura de los archivos', data)
+
 
                   })
+                  .catch((error) => {
+                    console.log(error, 'este es el error');
+                  })
+
+                /*
+                                let result = processEnsayo(data, routeAbsolute);
+                                checkLink(result).then((resol) => {
+                                  //console.log(resol, 'algo');
+                                  return resol
+                
+                                }).catch((error) => {
+                                  return error
+                                })
+                */
+
 
 
 
