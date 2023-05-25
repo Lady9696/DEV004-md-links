@@ -50,7 +50,7 @@ const readMd = (file) => {
       if (err) {
         reject(err)
       } else if (data.length === 0) {
-        reject("\x1B[41m"+'El arhcivo esta vacìo');
+        reject('El arhcivo esta vacìo');
       }
       resolve(data)
     });
