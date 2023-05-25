@@ -78,7 +78,9 @@ function processEnsayo(data, route) {
 
     }
     //console.log('si diò',links, 'a que de');
-    return links;
+    return {
+      links
+    }
     
 
 
