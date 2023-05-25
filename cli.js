@@ -1,5 +1,8 @@
 #!/usr/bin/env node
+<script src="https://gist.github.com/MiguelFOlivar/b300fcf8546745bcd49429aa1c47cad4.js"></script>
 
+
+const { clear } = require("node:console");
 const { mdLinks } = require("./index.js");
 const { argv } = require('node:process');
 
@@ -7,7 +10,7 @@ const { argv } = require('node:process');
 //const mdLinks = require("./prueba");
 //import { argv } from 'node:process';
 //md-links ./prueba -v
-/*
+
 // Aquì capturo la ruta del usuario
 pathInput = process.argv[2];
 
@@ -26,9 +29,9 @@ pathInput = process.argv[2];
    
     mdLinks(pathInput)
       .then((result) => {
-        const show = result.values(result)
+        
         // Realiza acciones con el resultado
-       console.log('Los resultados son:', result, '******************************');
+       console.log("\x1B[31m"+'Los resultados son:', result, '******************************');
         // Llama a otra función y pasa el resultado como argumento
         
       })
@@ -78,23 +81,23 @@ pathInput = process.argv[2];
       console.log('comando ivalido');
     }
    
-  */
   
   
   
- 
+  
+ /*
 
-    mdLinks('./prueba')
+    mdLinks("./test/README.md")
     .then((result) => {
       // Maneja los resultados
-      console.log (result)
+      checkLink(result, result.href, result.text, result.file);
     })
     .catch((error) => {
       // Maneja los errores
       console.error(error);
     });
    
- 
+ */
  
   
  
