@@ -301,7 +301,10 @@ const getAllFilesMd = (dirPath, arrayOfFiles) => {
 
      else {
       const filePath = path.join(dirPath, file);
-      arrayOfFiles.push(filePath);
+      if(identificatorMd(file)){
+        arrayOfFiles.push(filePath);
+      }
+      
 
     }
     console.log(file, 'oooooooooooooooooooooooooooo')
@@ -309,7 +312,7 @@ const getAllFilesMd = (dirPath, arrayOfFiles) => {
     //console.log(identificatorMd(file), '**************')
 
   })
-  return identificatorMd(arrayOfFiles, '+++++++++++++++++')
+  return arrayOfFiles
   //return arrayOfFiles
   //console.log(arrayOfFiles, 'llalalalaal');
 
