@@ -294,21 +294,21 @@ const getAllFilesMd = (dirPath, arrayOfFiles) => {
 
     if (fs.statSync(dirPath + "/" + file).isDirectory()) {
       arrayOfFiles = getAllFilesMd(dirPath + "/" + file, arrayOfFiles)
-      
-        
-        //return file
-      }
 
-     else {
+
+      //return file
+    }
+
+    else {
       const filePath = path.join(dirPath, file);
-      if(identificatorMd(file)){
+      if (identificatorMd(file)) {
         arrayOfFiles.push(filePath);
       }
-      
+
 
     }
     console.log(file, 'oooooooooooooooooooooooooooo')
-    
+
     //console.log(identificatorMd(file), '**************')
 
   })
@@ -321,31 +321,34 @@ const getAllFilesMd = (dirPath, arrayOfFiles) => {
 let indice = 0;
 const itera = (directoryFile, routeAbsolute) => {
   //funciòn que me itere
-    
-    if (directoryFile[indice]) {
-      
-         // El archivo es un archivo Markdown (.md)
-      // Realiza las acciones que necesites con el archivo
-      console.log(directoryFile[indice], 'el archivos md');
-      //ahora los leo invocando la funciòn nuevamente
-      readMd(directoryFile[indice])
-        .then((data) => {
-          console.log('aqui muestro la lectura de los archivos', data)
-          //let result2 = processEnsayo(data, routeAbsolute);
-          
-           //console.log(result2, '----------------------')
-           if(indice <= directoryFile.length) {
-            //console.log( directoryFile.length, '++++++++++++++++');
-            indice++//va aumentar en 1
-            //console.log(indice, '**********');
-            return itera(directoryFile, routeAbsolute)//tiene el valor 1
-            
-          }
-                   
-        })// este es el catch de readfile
-        .catch((error) => {
-          console.log(error, 'este es el error');
-        })
+
+  if (directoryFile[indice]) {
+
+    // El archivo es un archivo Markdown (.md)
+    // Realiza las acciones que necesites con el archivo
+    console.log(directoryFile[indice], 'el archivos md');
+    //ahora los leo invocando la funciòn nuevamente
+    readMd(directoryFile[indice])
+      .then((data) => {
+        //console.log('aqui muestro la lectura de los archivos', data)
+
+        console.log(data)
+
+        //console.log(result2, '----------------------')
+        if (indice <= directoryFile.length) {
+          //console.log( directoryFile.length, '++++++++++++++++');
+          //console.log(result2);
+          indice++//va aumentar en 1
+          //console.log(indice, '**********');
+          itera(directoryFile, routeAbsolute)//tiene el valor 1
+          let result2 = processEnsayo(data, routeAbsolute);
+          return result2
+        }
+
+      })// este es el catch de readfile
+      .catch((error) => {
+        console.log(error, 'este es el error');
+      })
 
 
 
@@ -355,9 +358,9 @@ const itera = (directoryFile, routeAbsolute) => {
 
 
 
-    }
+  }
 
-  
+
 }
 
 //readMd

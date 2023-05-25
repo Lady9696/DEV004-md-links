@@ -60,8 +60,10 @@ const mdLinks = (routes, options) => {
             console.log(directoryFiles, 'esto');
             // itero los archivos 
             let indice = 0;
+            //esta es mi funciòn para iterar los archivos y leerlos
            const mdFiles = itera(directoryFiles, routeAbsolute);
            console.log(mdFiles, 'asdfgh');
+           //processEnsayo(data, routeAbsolute);
            
 
 
