@@ -286,30 +286,30 @@ function checkLink(result, url, text, file) {
 
 
 //funciòn para leer todos los archivos de los directorios
-const getAllFilesMd = (dirPath, file, arrayOfFiles) => {
+const getAllFilesMd = (dirPath, arrayOfFiles) => {
   files = fs.readdirSync(dirPath)
   arrayOfFiles = arrayOfFiles || []
-  file = file|| []
 
   files.forEach(function (file) {
+
     if (fs.statSync(dirPath + "/" + file).isDirectory()) {
       arrayOfFiles = getAllFilesMd(dirPath + "/" + file, arrayOfFiles)
+      
+        
+        //return file
+      }
 
-    } else {
+     else {
       const filePath = path.join(dirPath, file);
       arrayOfFiles.push(filePath);
 
     }
-    //console.log(file, 'oooooooooooooooooooooooooooo')
-    if (identificatorMd(file)){
-      //console.log(file, '*******');
-      return file
-    }
+    console.log(file, 'oooooooooooooooooooooooooooo')
+    
     //console.log(identificatorMd(file), '**************')
 
   })
-  return file
-  //console.log(file, '*******');
+  return identificatorMd(arrayOfFiles, '+++++++++++++++++')
   //return arrayOfFiles
   //console.log(arrayOfFiles, 'llalalalaal');
 
