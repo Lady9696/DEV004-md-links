@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-<script src="https://gist.github.com/MiguelFOlivar/b300fcf8546745bcd49429aa1c47cad4.js"></script>
+//<script src="https://gist.github.com/MiguelFOlivar/b300fcf8546745bcd49429aa1c47cad4.js"></script>
 
 
 const { clear } = require("node:console");
@@ -31,7 +31,7 @@ pathInput = process.argv[2];
       .then((result) => {
         
         // Realiza acciones con el resultado
-       console.log("\x1B[31m"+'Los resultados son:', result, '******************************');
+       //console.log("\x1b[35m"+'Los resultados son:', result, '******************************');
         // Llama a otra función y pasa el resultado como argumento
         
       })

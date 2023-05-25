@@ -50,7 +50,7 @@ const readMd = (file) => {
       if (err) {
         reject(err)
       } else if (data.length === 0) {
-        reject('el arhcivo esta vacìo');
+        reject("\x1B[41m"+'El arhcivo esta vacìo');
       }
       resolve(data)
     });
@@ -64,7 +64,7 @@ function processEnsayo(data, route) {
 
   const identificator = data.match(regexMdLinks);
   if (identificator === null) {
-    console.log(`No se encontraron enlaces en el archivo `);
+    console.log("\x1B[41m"+`No se encontraron enlaces en el archivo `);
     return {
       links: []
     };
@@ -307,7 +307,7 @@ const getAllFilesMd = (dirPath, arrayOfFiles) => {
 
 
     }
-    console.log(file, 'oooooooooooooooooooooooooooo')
+    console.log("\x1B[38;2;255;151;203m"+'Archivo encontrado de la ruta ingresada : ', "\x1b[35m"+file);
 
     //console.log(identificatorMd(file), '**************')
 

@@ -14,19 +14,19 @@ const mdLinks = (routes, options) => {
     // se verifica si la ruta existe
 
     if (existPath(routes)) {
-      console.log('existe la ruta');
+      console.log("\x1B[38;2;255;151;203m"+'La ruta existe');
       // si la ruta es relativa, se vuelve absoluta
       const routeAbsolute = absolute(routes);
-      console.log(routeAbsolute);
+      console.log("\x1B[38;2;255;151;203m"+'La ruta absoluta es:',"\x1b[35m",routeAbsolute);
 
       // esta funciòn em eprmite identificar si es un archivo o es un directorio
       getStats(routeAbsolute)
         .then((stats) => {
           if (stats.isFile()) {
-            console.log('es un archivo', routeAbsolute);
+            console.log("\x1B[38;2;255;151;203m"+'Es una ruta de archivo:',"\x1b[35m",routeAbsolute,);
             // Me permite saber si es un archivo md
             if (identificatorMd(routeAbsolute)) {
-              console.log(routeAbsolute, 'es md');
+              console.log("\x1B[38;2;255;151;203m"+'Es un archivo Markdown:',"\x1b[35m",routeAbsolute, );
               // Para leer archivos md
               // el 'utf8' me permite obtener el string
               readMd(routeAbsolute)
@@ -45,7 +45,7 @@ const mdLinks = (routes, options) => {
 
 
                 }).catch((error) => {
-                  console.log(error, 'este es el error');
+                  console.log(error);//error archivo vacio
                 })
 
 
@@ -57,7 +57,8 @@ const mdLinks = (routes, options) => {
           } else {
             // aqui esta todos los archivos  en un array
             const directoryFiles = getAllFilesMd(routeAbsolute);
-            console.log(directoryFiles, 'esto');
+            console.log("\x1B[38;2;255;151;203m", 'Es una ruta de directorio')
+            console.log("\x1B[38;2;255;151;203m"+'Los archivos md son estos: ', directoryFiles);
             // itero los archivos 
             let indice = 0;
             //esta es mi funciòn para iterar los archivos y leerlos
@@ -74,7 +75,7 @@ const mdLinks = (routes, options) => {
       //tabnine
 
     } else {
-      console.log('la ruta no existe');
+      console.log( "\x1B[41m"+'La ruta no existe');
     }
   })
 
