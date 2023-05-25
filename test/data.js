@@ -64,32 +64,25 @@ function processEnsayo(data, route) {
 
   const identificator = data.match(regexMdLinks);
   if (identificator === null) {
-    console.log("\x1B[41m"+`No se encontraron enlaces en el archivo `);
-    return {
-      links: []
-    };
-  }
+    console.log("\x1B[41m" + `No se encontraron enlaces en el archivo `);
 
-  let arrObjFalse = [];
-  let links = [];
-  //console.log(identificator, 'este es el extractor d elinks');
-  for (let i = 0; i < identificator.length; i++) {
-    const text = singleMatch.exec(identificator[i]);
-    arrObjFalse.push({
-      href: text[2],
-      text: text[1],
-      file: route,
-    });
-    //console.log(arrObjFalse.file, 'esto es la ruta');
-    links.push({ href: text[2], text: text[1], file: route, });
+  } else {
+    let links = [];
+    //console.log(identificator, 'este es el extractor d elinks');
+    for (let i = 0; i < identificator.length; i++) {
+      const text = singleMatch.exec(identificator[i]);
+
+      //console.log(arrObjFalse.file, 'esto es la ruta');
+      links.push({ href: text[2], text: text[1], file: route, });
+
+
+    }
+    //console.log('si diò',links, 'a que de');
+
+    return links;
 
 
   }
-  //console.log('si diò',links, 'a que de');
-
-  return {
-    links: links
-  };
 
 }
 function checkLink(result, url, text, file) {
@@ -307,7 +300,7 @@ const getAllFilesMd = (dirPath, arrayOfFiles) => {
 
 
     }
-    console.log("\x1B[38;2;255;151;203m"+'Archivo encontrado de la ruta ingresada : ', "\x1b[35m"+file);
+    console.log("\x1B[38;2;255;151;203m" + 'Archivo encontrado de la ruta ingresada : ', "\x1b[35m" + file);
 
     //console.log(identificatorMd(file), '**************')
 
@@ -317,48 +310,56 @@ const getAllFilesMd = (dirPath, arrayOfFiles) => {
   //console.log(arrayOfFiles, 'llalalalaal');
 
 }
-
-let indice = 0;
-const itera = (directoryFile, routeAbsolute) => {
-  //funciòn que me itere
-
-  if (directoryFile[indice]) {
-
+const getLinks = (mdFiles) => {
+  let indice = 0;
+  const totalmd = mdFiles.length - 1;
+  const empyArray = [];
+  const itera = (file) => {
+    //funciòn que me itere
     // El archivo es un archivo Markdown (.md)
     // Realiza las acciones que necesites con el archivo
-    console.log(directoryFile[indice], 'el archivos md');
     //ahora los leo invocando la funciòn nuevamente
-    readMd(directoryFile[indice])
+    readMd(file)
       .then((data) => {
-
-        //
-
+        const result2 = processEnsayo(data, file);
+        console.log(result2, 'aaaaaaaaaaaa');
+        empyArray.push(result2);
+        indice++
         //console.log(result2, '----------------------')
-        if (indice <= directoryFile.length) {
-          //console.log( directoryFile.length, '++++++++++++++++');
-          indice++//va aumentar en 1
-          //console.log(indice, '**********');
-          itera(directoryFile, routeAbsolute)//tiene el valor 1
-          let result2 = processEnsayo(data, routeAbsolute);
-          return result2
-          
+        if (indice <= totalmd) {
+          itera(mdFiles[indice])
 
+        } else {
+          //hacer console.log del array
+          return empyArray.flat()
         }
 
       })// este es el catch de readfile
       .catch((error) => {
         console.log(error, 'este es el error');
+        indice++
+
+        //console.log(result2, '----------------------')
+        if (indice <= totalmd) {
+          itera(mdFiles[indice])
+
+        } else {
+          //hacer console.log del array
+          return empyArray.flat()
+        }
       })
-    }
+
   }
-    //readMd
+  itera(mdFiles[indice])
+}
+//readMd
 
 
 
-    module.exports = {
+module.exports = {
 
-      existPath, absolute, checkLink, getAllFilesMd, identificatorMd, readMd, getStats, processEnsayo, itera,//readDirectory, identificatorMd,
-    };
-    module.exports.fs = require("fs");
-    module.exports.path = require("path");
+  existPath, absolute, checkLink, getAllFilesMd, identificatorMd, readMd, getStats, processEnsayo, getLinks//readDirectory, identificatorMd,
+};
+module.exports.fs = require("fs");
+module.exports.path = require("path");
 

@@ -1,7 +1,7 @@
 // fs se debe usar para poder realizar las fucniones debemos 'importar' el mòdulo fs
 //const { identificator } = require('./test/data');
 //const axios = require('axios');
-const { existPath, absolute, checkLink, getAllFilesMd, identificatorMd, readMd, getStats, processEnsayo,itera} = require('./test/data');
+const { existPath, absolute, checkLink, getAllFilesMd, identificatorMd, readMd, getStats, processEnsayo,getLinks} = require('./test/data');
 //const { error, log } = require('console');
 //const { mdLinks } = require ('./cli.js')
 
@@ -60,8 +60,13 @@ const mdLinks = (routes, options) => {
             console.log("\x1B[38;2;255;151;203m", 'Es una ruta de directorio')
             console.log("\x1B[38;2;255;151;203m"+'Los archivos md son estos: ', directoryFiles);
             // itero los archivos 
-            let indice = 0;
+            //let indice = 0;
             //esta es mi funciòn para iterar los archivos y leerlos
+           
+            console.log( getLinks(directoryFiles),'*************');
+            //get links debe ser una promesa 
+            //encadenarla con .then para que no me salga undefind
+
            
            
            
