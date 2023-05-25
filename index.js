@@ -33,8 +33,9 @@ const mdLinks = (routes, options) => {
                 .then((data) => {
                   // esta funciòn me permite extaer los links e iterarlos
                   let result = processEnsayo(data, routeAbsolute);
+                  
 
-                  // console.log(result,'******');
+                  console.log(result,'******');
                   checkLink(result)
                     .then((resol) => {
                       // console.log(resol, 'algo');
