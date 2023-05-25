@@ -327,40 +327,19 @@ const itera = (directoryFile, routeAbsolute) => {
     // El archivo es un archivo Markdown (.md)
     // Realiza las acciones que necesites con el archivo
     console.log(directoryFile[indice], 'el archivos md');
-    //ahora los leo invocando la funciòn nuevamente
-    readMd(directoryFile[indice])
-      .then((data) => {
-        //console.log('aqui muestro la lectura de los archivos', data)
-
-        console.log(data)
-
-        //console.log(result2, '----------------------')
-        if (indice <= directoryFile.length) {
-          //console.log( directoryFile.length, '++++++++++++++++');
-          //console.log(result2);
-          indice++//va aumentar en 1
-          //console.log(indice, '**********');
-          itera(directoryFile, routeAbsolute)//tiene el valor 1
-          let result2 = processEnsayo(data, routeAbsolute);
-          return result2
-        }
-
-      })// este es el catch de readfile
-      .catch((error) => {
-        console.log(error, 'este es el error');
-      })
-
-
-
-
-
-
-
+    if (indice <= directoryFile.length) {
+      //console.log( directoryFile.length, '++++++++++++++++');
+      //console.log(result2);
+      indice++//va aumentar en 1
+      //console.log(indice, '**********');
+      //return itera(directoryFile, routeAbsolute)//tiene el valor 1
+      //ahora los leo invocando la funciòn nuevamente
+      console.log(itera(directoryFile, routeAbsolute), '+++++++++');
+      
+    }
 
 
   }
-
-
 }
 
 //readMd
@@ -369,11 +348,8 @@ const itera = (directoryFile, routeAbsolute) => {
 
 module.exports = {
 
-  existPath, absolute, checkLink, getAllFilesMd, identificatorMd, readMd, getStats, processEnsayo, itera//readDirectory, identificatorMd,
+  existPath, absolute, checkLink, getAllFilesMd, identificatorMd, readMd, getStats, processEnsayo, itera,//readDirectory, identificatorMd,
 };
 module.exports.fs = require("fs");
 module.exports.path = require("path");
-
-
-
 
