@@ -91,7 +91,7 @@ function checkLink(result, url, text, file) {
   if (result.length === 0) {
     console.log('esta vacio');
   } else {
-    console.log(result.links,'+++');
+    //console.log(result.links,'+++');
     const promisesArray = result.links.map((link) => {
       const objectTrue = {
         href: url,

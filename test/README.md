@@ -1,176 +1,82 @@
 # Markdown Links
 
+## Índice
 
+* [1. Preámbulo](#1-preámbulo)
+* [2. Resumen del proyecto](#2-resumen-del-proyecto)
+* [3. Diagrama de Flujo del Proyecto](#3-diagramas-de-flujo)
+* [4. Consideraciones generales](#4-consideraciones-generales)
+* [5. Criterios de aceptación mínimos del proyecto](#5-criterios-de-aceptación-mínimos-del-proyecto)
+* [6. Entregables](#6-entregables)
+* [7. Hacker edition](#7-hacker-edition)
+* [8. Pistas, tips y lecturas complementarias](#8-pistas-tips-y-lecturas-complementarias)
+* [9. Checklist](#9-checklist)
+* [10. Achicando el problema](#10-achicando-el-problema)
+
+***
 
 ## 1. Preámbulo
 
-El presente proyecto  se ha creado una herramienta que permite ejecutar comandos desde la línea de comandos para analizar archivos Markdown específicos. Una vez que se procesa el archivo, se extraen los enlaces y se realiza una verificación para asegurarse de que estén activos. Además, se recopilan estadísticas, como el número total de enlaces, la cantidad de enlaces rotos y la cantidad de enlaces únicos.
+En el presente proyecto se construyò herramienta que  permite ejecutar comandos desde la línea de comandos para analizar archivos Markdown específicos. Una vez que se procesa el archivo, se extraen los enlaces y se realiza una verificación para asegurarse de que estén activos. Además, se recopilan estadísticas, como el número total de enlaces, la cantidad de enlaces rotos y la cantidad de enlaces únicos.
+
+La biblioteca en JavaScript proporciona las funciones y utilidades necesarias para leer y analizar archivos Markdown, verificar los enlaces y generar el informe de estadísticas. Esta biblioteca puede ser utilizada por otros desarrolladores para integrarla en sus propios proyectos y realizar análisis similares de archivos Markdown.
 
 ## 2. Resumen del proyecto
 
-En este proyecto crearás una herramienta de línea de comando (CLI) así como tu
-propia librería (o biblioteca - library) en JavaScript.
+En este proyecto se ha desarrollado un programa que se ejecutará en la terminal o consola. Para utilizar esta aplicación, se utilizarán comandos específicos que he diseñado y programado en la misma línea de comandos.
 
-En esta oportunidad **nos alejamos del navegador** para construir un
-programa que se ejecutará en la terminal usando Node.js. La forma en la que interactuaras con esta aplicación es mediante comandos 
-que tu diseñaras/programaras por la terminal/shell. Aprenderemos sobre procesos
-(`process.env`, `process.argv`, ...), cómo interactuar con el sistema archivos,
-cómo hacer consultas/peticiones HTTP, etc.
+Estos comandos nos permitirán acceder a los enlaces presentes en archivos o directorios, obtener el total de enlaces, identificar enlaces únicos y encontrar enlaces rotos.
 
-[Node.js](https://nodejs.org/es/) es un entorno de ejecución para JavaScript
-construido con el [motor de JavaScript V8 de Chrome](https://developers.google.com/v8/).
-Esto nos va a permitir ejecutar JavaScript en el entorno del sistema operativo,
-ya sea tu máquina o un servidor, lo cual nos abre las puertas para poder
-interactuar con el sistema en sí, archivos, redes, ...
+## 3. Diagramas de Flujo
+Se crearon los siguientes diagramas
+ Diagrama de Flujo de la API
 
-Diseñar tu propia librería es una experiencia fundamental para cualquier
-desarrollador porque que te obliga a pensar en la interfaz (API) de tus
-_módulos_ y cómo será usado por otros developers. Debes tener especial
-consideración en peculiaridades del lenguaje, convenciones y buenas prácticas.
+![Imagen Diagrama API](digrama\digrama.drawio.png)
 
-## 3. Objetivos de aprendizaje
+- Diagrama de Flujo del CLI
 
-Reflexiona y luego marca los objetivos que has llegado a entender y aplicar en tu proyecto. Piensa en eso al decidir tu estrategia de trabajo.
+![Imagen Diagrama CLI](digrama\digramacli.drawio.png)
 
-### JavaScript
 
-- [ ] **Diferenciar entre tipos de datos primitivos y no primitivos**
 
-- [ ] **Arrays (arreglos)**
 
-  <details><summary>Links</summary><p>
+## 4. Modo de uso "API"
+El proyecto consta de dos partes: una API en JavaScript y una interfaz de línea de comandos (CLI).
 
-  * [Arreglos](https://curriculum.laboratoria.la/es/topics/javascript/04-arrays)
-  * [Array - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/)
-  * [Array.prototype.sort() - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
-  * [Array.prototype.forEach() - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)
-  * [Array.prototype.map() - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/map)
-  * [Array.prototype.filter() - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)
-  * [Array.prototype.reduce() - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)
-</p></details>
+1. API de JavaScript
+La API es una función llamada mdLinks(filePath, options) que devuelve una promesa. Recibe un parámetro: filePath, que puede ser una ruta absoluta o relativa. Esta función busca en el archivo especificado y devuelve un array de objetos, donde cada objeto representa un enlace encontrado.
 
-- [ ] **Objetos (key, value)**
+Valores de retorno con validate: false:
 
-  <details><summary>Links</summary><p>
+href: URL encontrada.
+text: Texto que aparece dentro del enlace (<a>).
+file: Ruta del archivo donde se encontró el enlace.
 
-  * [Objetos en JavaScript](https://curriculum.laboratoria.la/es/topics/javascript/05-objects/01-objects)
-</p></details>
+Valores de retorno con validate: true:
 
-- [ ] **Uso de condicionales (if-else, switch, operador ternario, lógica booleana)**
 
-  <details><summary>Links</summary><p>
+* `href`: URL encontrada.
+* `text`: Texto que aparecía dentro del link (`<a>`).
+* `file`: Ruta del archivo donde se encontró el link.
+* `status`: Código de respuesta HTTP.
+* `ok`: Mensaje `fail` en caso de fallo u `ok` en caso de éxito.
 
-  * [Estructuras condicionales y repetitivas](https://curriculum.laboratoria.la/es/topics/javascript/02-flow-control/01-conditionals-and-loops)
-  * [Tomando decisiones en tu código — condicionales - MDN](https://developer.mozilla.org/es/docs/Learn/JavaScript/Building_blocks/conditionals)
-</p></details>
+## 6. Modo de uso "Interfaz de Línea de Comando (CLI)"
+1.  Si se usa **md-links <path> --validate** el módulo hará una petición HTTP para averiguar si los links funcionan o no. Nos debe dar la href, text, file, status y mensaje OK o FAIL. 
+![--validate](comandos\validate.png)
 
-- [ ] **Funciones (params, args, return)**
+2. Si utilizas el comando md-links <path> --stats, recibirás un texto que proporciona estadísticas básicas sobre los links encontrados en el archivo o directorio especificado.
+![--stats](comandos\stats.png)
 
-  <details><summary>Links</summary><p>
+3. Si ejecutas el comando md-links <path> --validate --stats, se mostrarán estadísticas que también requieren los resultados de validación de los links.
 
-  * [Funciones (control de flujo)](https://curriculum.laboratoria.la/es/topics/javascript/02-flow-control/03-functions)
-  * [Funciones clásicas](https://curriculum.laboratoria.la/es/topics/javascript/03-functions/01-classic)
-  * [Arrow Functions](https://curriculum.laboratoria.la/es/topics/javascript/03-functions/02-arrow)
-  * [Funciones — bloques de código reutilizables - MDN](https://developer.mozilla.org/es/docs/Learn/JavaScript/Building_blocks/Functions)
-</p></details>
+Estas estadísticas adicionales incluyen:
 
-- [ ] **Recursión o recursividad**
-
-  <details><summary>Links</summary><p>
-
-  * [Píldora recursión - YouTube Laboratoria Developers](https://www.youtube.com/watch?v=lPPgY3HLlhQ)
-  * [Recursión o Recursividad - Laboratoria Developers en Medium](https://medium.com/laboratoria-developers/recursi%C3%B3n-o-recursividad-ec8f1a359727)
-</p></details>
-
-- [ ] **Módulos de CommonJS**
-
-  <details><summary>Links</summary><p>
-
-  * [Modules: CommonJS modules - Node.js Docs](https://nodejs.org/docs/latest/api/modules.html)
-</p></details>
-
-- [ ] **Diferenciar entre expresiones (expressions) y sentencias (statements)**
-
-- [ ] **Callbacks**
-
-  <details><summary>Links</summary><p>
-
-  * [Función Callback - MDN](https://developer.mozilla.org/es/docs/Glossary/Callback_function)
-</p></details>
-
-- [ ] **Promesas**
-
-  <details><summary>Links</summary><p>
-
-  * [Promise - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Promise)
-  * [How to Write a JavaScript Promise - freecodecamp (en inglés)](https://www.freecodecamp.org/news/how-to-write-a-javascript-promise-4ed8d44292b8/)
-</p></details>
-
-- [ ] **Pruebas unitarias (unit tests)**
-
-  <details><summary>Links</summary><p>
-
-  * [Empezando con Jest - Documentación oficial](https://jestjs.io/docs/es-ES/getting-started)
-</p></details>
-
-- [ ] **Pruebas asíncronas**
-
-  <details><summary>Links</summary><p>
-
-  * [Tests de código asincrónico con Jest - Documentación oficial](https://jestjs.io/docs/es-ES/asynchronous)
-</p></details>
-
-- [ ] **Uso de mocks y espías**
-
-  <details><summary>Links</summary><p>
-
-  * [Manual Mocks con Jest - Documentación oficial](https://jestjs.io/docs/es-ES/manual-mocks)
-</p></details>
-
-- [ ] **Pruebas de compatibilidad en múltiples entornos de ejecución**
-
-- [ ] **Uso de linter (ESLINT)**
-
-- [ ] **Uso de identificadores descriptivos (Nomenclatura y Semántica)**
-
-### Node.js
-
-- [ ] **Instalar y usar módulos con npm**
-
-  <details><summary>Links</summary><p>
-
-  * [Sitio oficial de npm (en inglés)](https://www.npmjs.com/)
-</p></details>
-
-- [ ] **Configuración de package.json**
-
-  <details><summary>Links</summary><p>
-
-  * [package.json - Documentación oficial (en inglés)](https://docs.npmjs.com/files/package.json)
-</p></details>
-
-- [ ] **Configuración de npm-scripts**
-
-  <details><summary>Links</summary><p>
-
-  * [scripts - Documentación oficial (en inglés)](https://docs.npmjs.com/misc/scripts)
-</p></details>
-
-- [ ] **process (env, argv, stdin-stdout-stderr, exit-code)**
-
-  <details><summary>Links</summary><p>
-
-  * [Process - Documentación oficial (en inglés)](https://nodejs.org/api/process.html)
-</p></details>
-
-- [ ] **File system (fs, path)**
-
-  <details><summary>Links</summary><p>
-
-  * [File system - Documentación oficial (en inglés)](https://nodejs.org/api/fs.html)
-  * [Path - Documentación oficial (en inglés)](https://nodejs.org/api/path.html)
-</p></details>
-
+Total de links: El número total de links encontrados en el archivo o directorio.
+Links únicos: El número de links únicos, es decir, aquellos que no se repiten.
+Links rotos: El número de links que están rotos o no funcionan correctamente.
+Links válidos: El número de links que son válidos y responden correctamente.
+![--validate--stats](comandos\statsvaliate.png)
 ### Control de Versiones (Git y GitHub)
 
 - [ ] **Git: Instalación y configuración**
