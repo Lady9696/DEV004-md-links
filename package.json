@@ -1,5 +1,5 @@
 {
-  "name": "lady9696-md-links",
+  "name": "ladyartemisa-md-links",
   "version": "0.1.0",
   "engines": {
     "node": ">=16.x"
@@ -19,7 +19,8 @@
     "axios": "^1.4.0",
     "jest": "^29.5.0",
     "md-links": "github:Lady9696/DEV004-md-links",
-    "node-fetch": "^3.3.1"
+    "node-fetch": "^3.3.1",
+    "markdown-it": "^13.0.1"
   },
   "author": "Leidy Suarez Miranda",
   "license": "ISC"
