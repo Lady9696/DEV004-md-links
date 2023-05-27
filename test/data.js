@@ -314,46 +314,49 @@ const getAllFilesMd = (dirPath, arrayOfFiles) => {
 
 }
 const getLinks = (mdFiles) => {
-  let indice = 0;
-  const totalmd = mdFiles.length - 1;
-  const empyArray = [];
-  const itera = (file) => {
-    //funciòn que me itere
-    // El archivo es un archivo Markdown (.md)
-    // Realiza las acciones que necesites con el archivo
-    //ahora los leo invocando la funciòn nuevamente
-    readMd(file)
-      .then((data) => {
-        const result2 = processEnsayo(data, file);
-        console.log(result2, 'aaaaaaaaaaaa');
-        empyArray.push(result2);
-        indice++
-        //console.log(result2, '----------------------')
-        if (indice <= totalmd) {
-          itera(mdFiles[indice])
-
-        } else {
-          //hacer console.log del array
-          return empyArray.flat()
-        }
-
-      })// este es el catch de readfile
-      .catch((error) => {
-        console.log(error, 'este es el error');
-        indice++
-
-        //console.log(result2, '----------------------')
-        if (indice <= totalmd) {
-          itera(mdFiles[indice])
-
-        } else {
-          //hacer console.log del array
-          return empyArray.flat()
-        }
-      })
-
-  }
-  itera(mdFiles[indice])
+  return new Promise ((resolve, reject) => {
+    let indice = 0;
+    const totalmd = mdFiles.length - 1;
+    const empyArray = [];
+    const itera = (file) => {
+      //funciòn que me itere
+      // El archivo es un archivo Markdown (.md)
+      // Realiza las acciones que necesites con el archivo
+      //ahora los leo invocando la funciòn nuevamente
+      readMd(file)
+        .then((data) => {
+          const result2 = processEnsayo(data, file);
+          console.log(result2, 'aaaaaaaaaaaa');
+          empyArray.push(result2);
+          indice++
+          //console.log(result2, '----------------------')
+          if (indice <= totalmd) {
+            itera(mdFiles[indice])
+  
+          } else {
+            //hacer console.log del array
+            resolve (empyArray.flat());
+          }
+  
+        })// este es el catch de readfile
+        .catch((error) => {
+          console.log(error, 'este es el error');
+          indice++
+  
+          //console.log(result2, '----------------------')
+          if (indice <= totalmd) {
+            itera(mdFiles[indice])
+  
+          } else {
+            //hacer console.log del array
+            resolve(empyArray.flat());
+          }
+        })
+  
+    }
+    itera(mdFiles[indice])
+  })
+ 
 }
 //readMd
 
