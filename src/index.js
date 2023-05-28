@@ -8,7 +8,7 @@ const {
   getStats,
   processEnsayo,
   getLinks,
-} = require("./test/data");
+} = require('src/data.js');
 
 const mdLinks = (routes, options) => {
   return new Promise((resolve, reject) => {
