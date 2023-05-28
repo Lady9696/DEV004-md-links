@@ -66,13 +66,15 @@ const mdLinks = (routes, options) => {
             //esta es mi funciòn para iterar los archivos y leerlos
            
           getLinks(directoryFiles)
-          .then(([firstResult]) => {
-            const { links } = firstResult;
-            //console.log(links,'*******');
-           const objet1 = Object.values(links);
-           //console.log(objet1)
-           const objet2 =Object.values(objet1);
-           console.log(objet2.href)
+          .then((resultDirectory) => {
+           //console.log(resultDirectory,'*******');
+           checkLink(resultDirectory)
+           .then((resultado1) => {
+           resolve(resultado1,'+++');
+
+           })
+
+          
            // Aquí puedes utilizar la variable `links`
             // Resto de tu código
           })

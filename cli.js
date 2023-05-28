@@ -31,7 +31,7 @@ pathInput = process.argv[2];
       .then((result) => {
         
         // Realiza acciones con el resultado
-       console.log("\x1b[35m"+'Los resultados son:', result);
+       console.log("\x1b[35m"+'Los resultados son:', result, 'si!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
         // Llama a otra función y pasa el resultado como argumento
         
       })

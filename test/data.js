@@ -78,22 +78,20 @@ function processEnsayo(data, route) {
 
     }
     //console.log('si diò',links, 'a que de');
-    return {
-      links: links
-    }
+    return links
     
 
 
   }
   
 }
-function checkLink(result, url, text, file) {
-  if (result.length === 0) {
+function checkLink(links, url, text, file) {
+  if (links.length === 0) {
     console.log('esta vacio');
   } else {
     
-    const promisesArray = result.links.map((link) => {
-      console.log(promisesArray,'****');
+    const promisesArray = links.map((link) => {
+      //console.log(promisesArray,'****');
       const objectTrue = {
         href: url,
         file: file,
