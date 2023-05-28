@@ -31,11 +31,11 @@ Estos comandos nos permitirán acceder a los enlaces presentes en archivos o dir
 Se crearon los siguientes diagramas
  Diagrama de Flujo de la API
 
-![Imagen Diagrama API](digrama\digrama.drawio.png)
+![Imagen Diagrama API](/digrama/digrama.drawio.png)
 
 - Diagrama de Flujo del CLI
 
-![Imagen Diagrama CLI](digrama\digramacli.drawio.png)
+![Imagen Diagrama CLI](/digrama/digramacli.drawio.png)
 
 
 
@@ -65,10 +65,10 @@ Valores de retorno con validate: true:
 Debes ingresar la ruta de archivo o directorio de la sigueinte manera:
 
 1.  Si se usa **md-links <path> --validate** el módulo hará una petición HTTP para averiguar si los links funcionan o no. Nos debe dar la href, text, file, status y mensaje OK o FAIL. 
-![--validate] o [-v](comandos\validate.png)
+![--validate] o [-v](/comandos/validateDirectory.png)
 
 2. Si utilizas el comando md-links <path> --stats, recibirás un texto que proporciona estadísticas básicas sobre los links encontrados en el archivo o directorio especificado.
-![--stats] o [-s](comandos\stats.png)
+![--stats] o [-s](/comandos/stats.png)
 
 3. Si ejecutas el comando md-links <path> --validate --stats, se mostrarán estadísticas que también requieren los resultados de validación de los links.
 
@@ -78,50 +78,19 @@ Total de links: El número total de links encontrados en el archivo o directorio
 Links únicos: El número de links únicos, es decir, aquellos que no se repiten.
 Links rotos: El número de links que están rotos o no funcionan correctamente.
 Links válidos: El número de links que son válidos y responden correctamente.
-![--validate--stats] o [-s-v](comandos\statsvaliate.png)
+![--validate--stats] o [-s-v](/comandos/statsvaliate.png)
 
-
-- [ ] **Git: Instalación y configuración**
-
-- [ ] **Git: Control de versiones con git (init, clone, add, commit, status, push, pull, remote)**
-
-- [ ] **Git: Integración de cambios entre ramas (branch, checkout, fetch, merge, reset, rebase, tag)**
-
-- [ ] **GitHub: Creación de cuenta y repos, configuración de llaves SSH**
-
-- [ ] **GitHub: Colaboración en Github (branches | forks | pull requests | code review | tags)**
-
-- [ ] **GitHub: Organización en Github (projects | issues | labels | milestones | releases)**
-
-### HTTP
-
-- [ ] **Consulta o petición (request) y respuesta (response).**
-
-  <details><summary>Links</summary><p>
-
-  * [Generalidades del protocolo HTTP - MDN](https://developer.mozilla.org/es/docs/Web/HTTP/Overview)
-  * [Mensajes HTTP - MDN](https://developer.mozilla.org/es/docs/Web/HTTP/Messages)
-</p></details>
-
-- [ ] **Códigos de status de HTTP**
-
-  <details><summary>Links</summary><p>
-
-  * [Códigos de estado de respuesta HTTP - MDN](https://developer.mozilla.org/es/docs/Web/HTTP/Status)
-  * [The Complete Guide to Status Codes for Meaningful ReST APIs - dev.to](https://dev.to/khaosdoctor/the-complete-guide-to-status-codes-for-meaningful-rest-apis-1-5c5)
-</p></details>
 
 ## 7. Test Unitarios
 
-Se realizaron 8 test unitarios para cada una de las funciones de la API, como los otros archivos .js del proyecto.
-![test](comandos\test.jpg)
-
+Se realizaron 10 test unitarios para  las funciones de la API, como los otros archivos .js del proyecto.
+![test1](/comandos/test.png)
 
 ## 8. Guía de Instalación
 
 Para instalar esta librería se debe hacer de la siguiente manera: 
 
-- de forma global: **npm install -g md-links**,
+- de forma global: **npm install -g ladyartemisa-md-links**,
 - de forma local: **npm install md-links --location=project**,
 - para que todas sus dependiencias funcionen correctamente como tercer paso se debe escribir en consola **npm install**,
 - para correr los test se debe usar **npm run test** o **npm test**.
