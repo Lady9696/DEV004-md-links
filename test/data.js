@@ -64,7 +64,7 @@ function processEnsayo(data, route) {
 
   const identificator = data.match(regexMdLinks);
   if (identificator === null) {
-    console.log("\x1B[41m" + `No se encontraron enlaces en el archivo `);
+    console.log( `No se encontraron enlaces en el archivo `);
 
   } else {
     let links = [];
@@ -79,7 +79,7 @@ function processEnsayo(data, route) {
     }
     //console.log('si diò',links, 'a que de');
     return {
-      links
+      links: links
     }
     
 
@@ -91,14 +91,15 @@ function checkLink(result, url, text, file) {
   if (result.length === 0) {
     console.log('esta vacio');
   } else {
-    //console.log(result.links,'+++');
+    
     const promisesArray = result.links.map((link) => {
+      console.log(promisesArray,'****');
       const objectTrue = {
         href: url,
         file: file,
         text: text,
       };
-
+      
       return axios.get(link.href)
         .then((response) => {
           link.status = response.status;
@@ -326,7 +327,7 @@ const getLinks = (mdFiles) => {
       readMd(file)
         .then((data) => {
           const result2 = processEnsayo(data, file);
-          console.log(result2, 'aaaaaaaaaaaa');
+          //console.log(result2, 'aaaaaaaaaaaa');
           empyArray.push(result2);
           indice++
           //console.log(result2, '----------------------')

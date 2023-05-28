@@ -35,7 +35,7 @@ const mdLinks = (routes, options) => {
                   let result = processEnsayo(data, routeAbsolute);
                   
 
-                  //console.log(result,'******');
+                  console.log(result,'******');
                   checkLink(result)
                     .then((resol) => {
                       // console.log(resol, 'algo');
@@ -60,11 +60,26 @@ const mdLinks = (routes, options) => {
             const directoryFiles = getAllFilesMd(routeAbsolute);
             console.log("\x1B[38;2;255;151;203m", 'Es una ruta de directorio')
             console.log("\x1B[38;2;255;151;203m"+'Los archivos md son estos: ', directoryFiles);
+            
             // itero los archivos 
             //let indice = 0;
             //esta es mi funciòn para iterar los archivos y leerlos
            
-            console.log( getLinks(directoryFiles),'*************');
+          getLinks(directoryFiles)
+          .then(([firstResult]) => {
+            const { links } = firstResult;
+            //console.log(links,'*******');
+           const objet1 = Object.values(links);
+           //console.log(objet1)
+           const objet2 =Object.values(objet1);
+           console.log(objet2.href)
+           // Aquí puedes utilizar la variable `links`
+            // Resto de tu código
+          })
+          .catch((error) => {
+            console.log(error);
+
+          })
             //get links debe ser una promesa 
             //encadenarla con .then para que no me salga undefind
 
