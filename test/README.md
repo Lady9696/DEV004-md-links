@@ -65,10 +65,10 @@ Valores de retorno con validate: true:
 Debes ingresar la ruta de archivo o directorio de la sigueinte manera:
 
 1.  Si se usa **md-links <path> --validate** el módulo hará una petición HTTP para averiguar si los links funcionan o no. Nos debe dar la href, text, file, status y mensaje OK o FAIL. 
-![--validate] o [-v](/comandos/validateDirectory.png)
+![--validate] (/comandos/validateDirectory.png)
 
 2. Si utilizas el comando md-links <path> --stats, recibirás un texto que proporciona estadísticas básicas sobre los links encontrados en el archivo o directorio especificado.
-![--stats] o [-s](/comandos/stats.png)
+![--stats] (/comandos/stats.png)
 
 3. Si ejecutas el comando md-links <path> --validate --stats, se mostrarán estadísticas que también requieren los resultados de validación de los links.
 
@@ -78,7 +78,7 @@ Total de links: El número total de links encontrados en el archivo o directorio
 Links únicos: El número de links únicos, es decir, aquellos que no se repiten.
 Links rotos: El número de links que están rotos o no funcionan correctamente.
 Links válidos: El número de links que son válidos y responden correctamente.
-![--validate--stats] o [-s-v](/comandos/statsvaliate.png)
+![--validate--stats]  (/comandos/statsvaliate.png)
 
 
 ## 7. Test Unitarios
