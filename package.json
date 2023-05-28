@@ -5,7 +5,7 @@
     "node": ">=16.x"
   },
   "bin": {
-    "md-links": "./cli.js"
+    "md-links": "cli.js"
   },
   "scripts": {
     "test": "jest --coverage"

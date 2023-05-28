@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const { mdLinks } = require("src/index.js");
+const { mdLinks } = require("./src/index.js");
 const { argv } = require('node:process');
 pathInput = process.argv[2];
 // Verifica si se proporcionó la opción de validación (--validate o -v)
