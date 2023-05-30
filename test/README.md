@@ -89,7 +89,7 @@ Se realizaron 10 test unitarios para  las funciones de la API, como los otros ar
 
 Para instalar esta librería se debe hacer de la siguiente manera: 
 
-- de forma global: **npm install -g ladyartemisa-md-links**,
+- de forma global: **npm i lady-md-links**,
 - de forma local: **npm install md-links --location=project**,
 - para que todas sus dependiencias funcionen correctamente como tercer paso se debe escribir en consola **npm install**,
 - para correr los test se debe usar **npm run test** o **npm test**.
